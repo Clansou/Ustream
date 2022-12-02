@@ -11,6 +11,16 @@ class FilmController extends Controller
     $page_next = $page + 1;
     $page_previous = $page -1;
 
+
+
+
+    if($page > 500){
+        header('Location: http://ustream.test/films/500');
+        exit();
+    }
+
+
+
     $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
     $json_data = file_get_contents($api_url);
     //print_r($json_data);
@@ -18,6 +28,11 @@ class FilmController extends Controller
     //print_r($films_data);
     $film_data = $films_data->results;
     //print_r($film_data);
+
+
+
+
+
     foreach ($film_data as $film) {
         echo "name: ".$film->title;
         echo "<br />";
@@ -34,6 +49,7 @@ class FilmController extends Controller
 }
 
     public function GetMovieByGenre($genre , $page) {
+        
         $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=FR';
         $each_genres = file_get_contents($each_genres);
         $each_genres = json_decode($each_genres);
@@ -51,6 +67,13 @@ class FilmController extends Controller
         //print_r($page);
         $page_next = $page + 1;
         $page_previous = $page -1;
+        if($page > 500){
+            header('Location: http://ustream.test/films/'.$genre.'/500');
+            exit();
+        }
+
+        
+
 
         $api_url = 'https://api.themoviedb.org/3/discover/movie?&with_genres='.$genre_id.'&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
         $json_data = file_get_contents($api_url);
@@ -59,18 +82,26 @@ class FilmController extends Controller
         //print_r($films_data);
         $film_data = $films_data->results;
         //print_r($film_data);
+
+
+        if($films_data->total_pages < 500){
+            $max_page = $films_data->total_pages;
+        }else{
+            $max_page = 500;
+        }
+        if($page > $max_page){
+            header('Location: http://ustream.test/films/'.$genre.'/'.$max_page);
+            exit();
+        }
+
+
+
         foreach ($film_data as $film) {
             echo "name: ".$film->title;
             echo "<br />";
             echo "description: ".$film->overview;
             echo "<br /> <br />";
         }
-        if($films_data->total_pages < 500){
-            $max_page = $films_data->total_pages;
-        }else{
-            $max_page = 500;
-        }
-        print_r($max_page);
         if($page_previous != 0){
             echo "<a href=http://ustream.test/films/".$genre."/".$page_previous."> previous page";
         }
