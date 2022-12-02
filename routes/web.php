@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/{page}',[FilmController::class, 'GetMovie']);
+Route::get('/films/{page}',[FilmController::class, 'GetMovie']);
