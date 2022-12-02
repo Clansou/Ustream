@@ -6,16 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="/app.css">
+    @vite('public/app.css')
 </head>
 <body>
 
-
+<header class="flex">
+    <h2>Bla</h2>
+    <h2>Bla</h2>
+    <h2>Bla</h2>
+</header>
 
 
 
 @foreach($film_data as $film)
-    <div class="filmCard">
-        <h2> titre : {{ $film->title }} </h2>
+    <div class="filmCard p-4 text-red">
+        <h2 class="font-bold"> titre : {{ $film->title }} </h2>
         <p> {{ $film->overview }} </p>
     </div>
 
