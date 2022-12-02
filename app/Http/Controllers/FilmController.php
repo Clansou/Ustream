@@ -34,12 +34,11 @@ class FilmController extends Controller
     //print_r($json_data);
     $films_data = json_decode($json_data);
     //print_r($films_data);
-    $film_data = $films_data->results;
-    //print_r($film_data);
+    
 
 
 
-    return view('films',['film_data' => $film_data]);
+    return view('films',['films_data' => $films_data , 'page' => $page]);
 
 
 
@@ -60,7 +59,7 @@ class FilmController extends Controller
         //print_r($each_genres);
         $genre_id = 0;
         foreach ($each_genres as $each_genre) {
-            print_r($each_genre->name);
+            //print_r($each_genre->name);
             if(strtolower($each_genre->name) == $genre){
                 $genre_id = $each_genre->id;
             }
@@ -104,7 +103,7 @@ class FilmController extends Controller
 
 
 
-    return view('films',['film_data' => $film_data]);
+    return view('films',['films_data' => $films_data , 'page' => $page]);
 
 
 
