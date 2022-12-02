@@ -26,7 +26,9 @@ class FilmController extends Controller
         header('Location: http://ustream.test/films/500');
         exit();
     }
-
+    echo '<form method="Post" action="">';
+    echo '<input type="checkbox" name="triASC">';
+    echo '<input type="submit" name="" value="Submit"';
 
 
     $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
@@ -39,20 +41,9 @@ class FilmController extends Controller
 
 
 
+    return view('films',['film_data' => $film_data]);
 
-
-    foreach ($film_data as $film) {
-        echo "name: ".$film->title;
-        echo "<br />";
-        echo "description: ".$film->overview;
-        echo "<br /> <br />";
-    }
-    if($page_previous != 0){
-        echo "<a href=http://ustream.test/films/".$page_previous."> previous page";
-    }
-    if($page_next != 501){ //501 car on peut pas aller au dessus je sais pas pourquoi
-       echo "<a href=http://ustream.test/films/".$page_next."> next page";
-    }
+    
     
 }
 
@@ -112,20 +103,13 @@ class FilmController extends Controller
             exit();
         }
 
+        
 
 
-        foreach ($film_data as $film) {
-            echo "name: ".$film->title;
-            echo "<br />";
-            echo "description: ".$film->overview;
-            echo "<br /> <br />";
-        }
-        if($page_previous != 0){
-            echo "<a href=http://ustream.test/films/".$genre."/".$page_previous."> previous page";
-        }
-        if($page_next != $max_page+1){ //501 car on peut pas aller au dessus je sais pas pourquoi
-        echo "<a href=http://ustream.test/films/".$genre."/".$page_next."> next page";
-        }
+    return view('films',['film_data' => $film_data]);
+
+    
+        
         
     }
 }
