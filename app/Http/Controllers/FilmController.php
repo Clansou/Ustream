@@ -76,6 +76,10 @@ class FilmController extends Controller
                 $genre_id = $each_genre->id;
             }
         }
+        if($genre_id == 0){
+            header('Location: http://ustream.test/films/1');
+            exit();
+        }
         //print_r($genre_id);
         //print_r($genre);
         //print_r($page);
