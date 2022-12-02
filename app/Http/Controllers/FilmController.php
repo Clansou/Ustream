@@ -41,6 +41,7 @@ class FilmController extends Controller
         //print_r($each_genres);
         $genre_id = 0;
         foreach ($each_genres as $each_genre) {
+            print_r($each_genre->name);
             if(strtolower($each_genre->name) == $genre){
                 $genre_id = $each_genre->id;
             }
@@ -64,11 +65,17 @@ class FilmController extends Controller
             echo "description: ".$film->overview;
             echo "<br /> <br />";
         }
-        if($page_previous != 0){
-            echo "<a href=http://ustream.test/films/".$page_previous."> previous page";
+        if($films_data->total_pages < 500){
+            $max_page = $films_data->total_pages;
+        }else{
+            $max_page = 500;
         }
-        if($page_next != 501){ //501 car on peut pas aller au dessus je sais pas pourquoi
-        echo "<a href=http://ustream.test/films/".$page_next."> next page";
+        print_r($max_page);
+        if($page_previous != 0){
+            echo "<a href=http://ustream.test/films/".$genre."/".$page_previous."> previous page";
+        }
+        if($page_next != $max_page+1){ //501 car on peut pas aller au dessus je sais pas pourquoi
+        echo "<a href=http://ustream.test/films/".$genre."/".$page_next."> next page";
         }
         
     }
