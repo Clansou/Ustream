@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="/app.css">
 </head>
 <body>
 
@@ -13,12 +14,27 @@
     
     
 @foreach($films_data->results as $films)
-    <h1> titre : {{ $films->title }} </h1>
+    <div class="filmCard">
+        <h2> titre : {{ $films->title }} </h2>
+        <p> {{ $films->overview }} </p>
+    </div>
 @endforeach
-{{$films_data->total_pages}}
 
-<?php if($page != 1){
-    ?><a href="http://ustream.test/films/{{$page-1}}">Previous<?php
+<?php 
+$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
+$actual_link = preg_replace('/0/', '', $actual_link ); // remove numbers
+$actual_link = preg_replace('/1/', '', $actual_link ); // remove numbers
+$actual_link = preg_replace('/2/', '', $actual_link ); // remove numbers
+$actual_link = preg_replace('/3/', '', $actual_link ); // remove numbers
+$actual_link = preg_replace('/4/', '', $actual_link ); // remove numbers
+$actual_link = preg_replace('/5/', '', $actual_link ); // remove numbers
+$actual_link = preg_replace('/6/', '', $actual_link ); // remove numbers
+$actual_link = preg_replace('/7/', '', $actual_link ); // remove numbers
+$actual_link = preg_replace('/8/', '', $actual_link ); // remove numbers
+$actual_link = preg_replace('/9/', '', $actual_link ); // remove numbers
+
+if($page != 1){
+    ?><a href="<?php $actual_link ?>{{$page-1}}">Previous<?php
     }
 
 if($films_data->total_pages >500){
@@ -30,7 +46,7 @@ else{
     
     
     if($page != $max_page){
-    ?><a href="http://ustream.test/films/{{$page-1}}">next<?php
+    ?><a href="<?php $actual_link ?>{{$page+1}}">next<?php
     }
 
 ?>

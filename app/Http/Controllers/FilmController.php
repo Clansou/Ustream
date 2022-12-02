@@ -10,7 +10,7 @@ class FilmController extends Controller
 
 
         if(is_numeric($page)){
-            
+
         }else{
             header('Location: http://ustream.test/films/1');
         exit();
@@ -18,8 +18,6 @@ class FilmController extends Controller
     //print_r($page);
     $page_next = $page + 1;
     $page_previous = $page -1;
-
-    
 
 
     if($page > 500){
@@ -42,18 +40,18 @@ class FilmController extends Controller
 
     return view('films',['films_data' => $films_data , 'page' => $page]);
 
-    
-    
+
+
 }
 
     public function GetMovieByGenre($genre , $page) {
         if(is_numeric($page)){
-            
+
         }else{
             header('Location: http://ustream.test/films/'.$genre.'/1');
             exit();
         }
-        
+
         $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=FR';
         $each_genres = file_get_contents($each_genres);
         $each_genres = json_decode($each_genres);
@@ -61,7 +59,7 @@ class FilmController extends Controller
         //print_r($each_genres);
         $genre_id = 0;
         foreach ($each_genres as $each_genre) {
-            print_r($each_genre->name);
+            //print_r($each_genre->name);
             if(strtolower($each_genre->name) == $genre){
                 $genre_id = $each_genre->id;
             }
@@ -80,7 +78,7 @@ class FilmController extends Controller
             exit();
         }
 
-        
+
 
 
         $api_url = 'https://api.themoviedb.org/3/discover/movie?&with_genres='.$genre_id.'&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
@@ -102,13 +100,13 @@ class FilmController extends Controller
             exit();
         }
 
-        
 
 
-    return view('films',['film_data' => $film_data , 'page' => $page]);
 
-    
-        
-        
+    return view('films',['films_data' => $films_data , 'page' => $page]);
+
+
+
+
     }
 }
