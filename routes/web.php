@@ -19,3 +19,5 @@ Route::get('/', function () {
 });
 
 Route::get('/films/{page}',[FilmController::class, 'GetMovie']);
+
+Route::get('/films/{genre}/{page}',[FilmController::class, 'GetMovieByGenre']);
