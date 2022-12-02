@@ -36,12 +36,11 @@ class FilmController extends Controller
     //print_r($json_data);
     $films_data = json_decode($json_data);
     //print_r($films_data);
-    $film_data = $films_data->results;
-    //print_r($film_data);
+    
 
 
 
-    return view('films',['film_data' => $film_data]);
+    return view('films',['films_data' => $films_data , 'page' => $page]);
 
     
     
@@ -106,7 +105,7 @@ class FilmController extends Controller
         
 
 
-    return view('films',['film_data' => $film_data]);
+    return view('films',['film_data' => $film_data , 'page' => $page]);
 
     
         
