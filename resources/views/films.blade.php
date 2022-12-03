@@ -21,10 +21,12 @@
     <input class="mt-[10vh] p-6 h-[10vh] w-[50vw] rounded-full border-2 border-black shadow-xl italic font-semibold" type="text" placeholder="Search movie...">
 </header>
 
+
+<h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top films</h2>
 <div class="grid grid-cols-4 justify-items-center">
     @foreach($films_data->results as $film)
         <div class="filmCard m-4 text-lg shadow-2xl">
-            <h2 class="filmTitle font-bold">{{ $film->title }}</h2>
+            <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
             <img src="https://image.tmdb.org/t/p/w220_and_h330_face/{{$film->poster_path }}" alt="Film Poster">
         </div>
     @endforeach
