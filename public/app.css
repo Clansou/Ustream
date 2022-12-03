@@ -9,6 +9,27 @@
     font-family: "Segoe UI";
 }
 body{
-    background-color: #718096;
+    background-color: white;
 }
+.filmCard{
+    position: relative;
+}
+.filmTitle{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: rgba(11, 11, 11, 0.72);
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    padding-top: 120%;
+    text-align: center;
+    transition: opacity .2s, visibility .2s;
+}
+.filmCard:hover .filmTitle {
+    visibility: visible;
+    opacity: 1;
+  }
 

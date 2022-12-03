@@ -10,19 +10,26 @@
 </head>
 <body>
 
-<header class="flex">
-    <h2>Bla</h2>
-    <h2>Bla</h2>
-    <h2>Bla</h2>
+<header class="flex flex-col items-center px-4 py-[10vh] bg-white shadow-2xl">
+    <div class="flex items-center justify-around">
+        <img class="w-[20%]" src="/img/logo.png" alt="Logo">
+        <div class="flex flex-row justify-end">
+            <img class="w-[4%] m-2" src="/img/profil.png" alt="Profil">
+            <img class="w-[4%] m-2" src="/img/home.png" alt="Home">
+        </div>
+    </div>
+    <input class="mt-[10vh] p-6 h-[10vh] w-[50vw] rounded-full border-2 border-black shadow-xl italic font-semibold" type="text" placeholder="Search movie...">
 </header>
 
+<div class="grid grid-cols-4 justify-items-center">
+    @foreach($films_data->results as $film)
+        <div class="filmCard m-4 text-lg shadow-2xl">
+            <h2 class="filmTitle font-bold">{{ $film->title }}</h2>
+            <img src="https://image.tmdb.org/t/p/w220_and_h330_face/{{$film->poster_path }}" alt="Film Poster">
+        </div>
+    @endforeach
+</div>
 
-@foreach($films_data->results as $film)
-    <div class="filmCard p-4 text-red">
-        <h2 class="font-bold"> titre : {{ $film->title }} </h2>
-        <p> {{ $film->overview }} </p>
-    </div>
-@endforeach
 
 <?php
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
