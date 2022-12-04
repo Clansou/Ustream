@@ -63,12 +63,12 @@ else{
     }?>
 
 
-<footer>
-    <div cl>
-        <img class="w-[20%]" src="/img/logo.png" alt="Logo">
-        <div>
-            <h2>Genres</h2>
-            <div class="grid grid-cols-4 w-[80%]">
+<footer class="bg-footer-grey text-yellow flex flex-col items-center">
+    <div class="flex items-center gap-[10%]">
+        <img class="w-[20%]" src="/img/logowhite.png" alt="Logo">
+        <div class="w-[50vw]">
+            <h2 class="text-lg font-semibold">Genres</h2>
+            <div class="grid grid-cols-4 w-[100%] gap-[5%]">
                 <a href="">Action</a>
                 <a href="">Aventure</a>
                 <a href="">Animation</a>
@@ -91,7 +91,7 @@ else{
             </div>
         </div>
     </div>
-    <p>Mentions légales  •  Politique de confidentialité  •  CGV</p>
+    <p class="p-5">Mentions légales  •  Politique de confidentialité  •  CGV</p>
 </footer>
 
 

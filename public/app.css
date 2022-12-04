@@ -33,7 +33,5 @@ body{
     visibility: visible;
     opacity: 1;
 }
-footer div a::before{
-    content: "• ";
-}
+
 
