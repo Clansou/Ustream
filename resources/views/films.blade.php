@@ -63,7 +63,36 @@ else{
     }?>
 
 
-
+<footer>
+    <div cl>
+        <img class="w-[20%]" src="/img/logo.png" alt="Logo">
+        <div>
+            <h2>Genres</h2>
+            <div class="grid grid-cols-4 w-[80%]">
+                <a href="">Action</a>
+                <a href="">Aventure</a>
+                <a href="">Animation</a>
+                <a href="">Comédie</a>
+                <a href="">Crime</a>
+                <a href="">Documentaire</a>
+                <a href="">Drame</a>
+                <a href="">Famille</a>
+                <a href="">Fantaisie</a>
+                <a href="">Histoire</a>
+                <a href="">Horreur</a>
+                <a href="">Musique</a>
+                <a href="">Mystère</a>
+                <a href="">Romance</a>
+                <a href="">Science Fiction</a>
+                <a href="">Téléfilm</a>
+                <a href="">Thriller</a>
+                <a href="">Guerre</a>
+                <a href="">Western</a>
+            </div>
+        </div>
+    </div>
+    <p>Mentions légales  •  Politique de confidentialité  •  CGV</p>
+</footer>
 
 
 </body>

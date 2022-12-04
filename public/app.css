@@ -25,12 +25,15 @@ body{
     color: #fff;
     visibility: hidden;
     opacity: 0;
-    padding-top: 120%;
+    padding-top: 100%;
     text-align: center;
     transition: opacity .2s, visibility .2s;
 }
 .filmCard:hover .filmTitle {
     visibility: visible;
     opacity: 1;
-  }
+}
+footer div a::before{
+    content: "• ";
+}
 
