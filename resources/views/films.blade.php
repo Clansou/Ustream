@@ -33,6 +33,8 @@
 </div>
 
 
+
+
 <?php
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
 $actual_link = preg_replace('/0/', '', $actual_link ); // remove numbers
@@ -63,12 +65,11 @@ else{
     }?>
 
 
-<footer class="bg-footer-grey text-yellow flex flex-col items-center">
-    <div class="flex items-center gap-[10%]">
+<footer class="bg-footer-grey text-yellow flex items-center gap-[10%] p-[5%]">
         <img class="w-[20%]" src="/img/logowhite.png" alt="Logo">
         <div class="w-[50vw]">
-            <h2 class="text-lg font-semibold">Genres</h2>
-            <div class="grid grid-cols-4 w-[100%] gap-[5%]">
+            <h2 class="text-2xl font-semibold my-2">Genres</h2>
+            <div class="mx-2 grid grid-cols-4 w-[100%] gap-[5%]">
                 <a href="">Action</a>
                 <a href="">Aventure</a>
                 <a href="">Animation</a>
@@ -90,8 +91,6 @@ else{
                 <a href="">Western</a>
             </div>
         </div>
-    </div>
-    <p class="p-5">Mentions légales  •  Politique de confidentialité  •  CGV</p>
 </footer>
 
 
