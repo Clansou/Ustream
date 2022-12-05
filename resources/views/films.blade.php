@@ -32,7 +32,22 @@
     @endforeach
 </div>
 
-
+<div class="carousel-container">
+    <div class="inner-carousel">
+        <div class="track">
+            @foreach($films_data->results as $film)
+                <div class="card">
+                    <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
+                    <img src="https://image.tmdb.org/t/p/w220_and_h330_face/{{$film->poster_path }}" alt="Film Poster">
+                </div>
+            @endforeach
+        </div>
+    </div>
+    <div class="nav">
+        <button class="prev"><img class="w-[4%] m-2" src="/img/profil.png" alt="Profil"></button>
+        <button class="next"><img class="w-[4%] m-2" src="/img/profil.png" alt="Profil"></button>
+    </div>
+</div>
 
 
 <?php
@@ -95,4 +110,5 @@ else{
 
 
 </body>
+<script type="text/javascript" src="/main.js"></script>
 </html>
