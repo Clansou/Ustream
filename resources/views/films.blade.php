@@ -16,11 +16,11 @@
     <h2>Bla</h2>
 </header>
 
-
 @foreach($films_data->results as $film)
     <div class="filmCard p-4 text-red">
         <h2 class="font-bold"> titre : {{ $film->title }} </h2>
         <p> {{ $film->overview }} </p>
+        <img src="https://image.tmdb.org/t/p/original/{{$film->backdrop_path}}" alt="">
     </div>
 @endforeach
 
