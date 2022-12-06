@@ -4,9 +4,6 @@ const carousel = document.querySelector(".carousel-container");
 const track = document.querySelector(".track");
 let width = carousel.offsetWidth;
 let index = 0;
-window.addEventListener("resize", function () {
-  width = carousel.offsetWidth;
-});
 next.addEventListener("click", function (e) {
   e.preventDefault();
   index = index + 1;
@@ -16,11 +13,13 @@ next.addEventListener("click", function (e) {
     next.classList.add("hide");
   }
 });
-prev.addEventListener("click", function () {
+prev.addEventListener("click", function (e) {
+  e.preventDefault();
   index = index - 1;
   next.classList.remove("hide");
-  if (index === 0) {
-    prev.classList.remove("show");
-  }
   track.style.transform = "translateX(" + index * -width + "px)";
+  if (track.offsetWidth - index * width < index * width) {
+    next.classList.remove("hide");
+  }
+  
 });
