@@ -1,8 +1,8 @@
 const prev = document.querySelector(".prev")
 const next = document.querySelector(".next")
 const carousel = document.querySelector(".carousel-container")
-const track = document.querySelector(".track")
-let width = carousel.offsetWidth
+const track = document.querySelector(".carousel-track")
+let width = carousel.offsetWidth/4
 let index = 0
 next.addEventListener("click", function (e) {
   e.preventDefault()
@@ -25,3 +25,20 @@ prev.addEventListener("click", function (e) {
     prev.style.display = "none"
   }
 })
+
+
+function myFunction() {
+  document.getElementById("myDropdown").classList.toggle("show");
+}
+window.onclick = function(e) {
+  if (!e.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}

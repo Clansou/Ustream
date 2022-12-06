@@ -18,7 +18,26 @@
             <img class="w-[4%] m-2" src="/img/home.png" alt="Home">
         </div>
     </div>
-    <input class="mt-[10vh] p-6 h-[10vh] w-[50vw] rounded-full border-2 border-black shadow-xl italic font-semibold" type="text" placeholder="Search movie...">
+    <div class="flex items-center mt-[3%] gap-[5%]">
+        <input class="p-6 h-[10vh] w-[50vw] rounded-full border-2 border-black shadow-xl italic font-semibold" type="text" placeholder="Search movie...">
+        <div class="dropdown">
+            <button onclick="myFunction()" class="dropbtn">Genre</button>
+            <div id="myDropdown" class="dropdown-content">
+                <div class="dropdown-content-genre grid grid-cols-4 w-[100%]">
+                <?php
+                        $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=FR';
+                        $each_genres = file_get_contents($each_genres);
+                        $each_genres = json_decode($each_genres);
+                        $each_genres= $each_genres->genres;
+                        foreach ($each_genres as $each_genre) {
+                            
+                            ?><a href="http://ustream.test/films/<?php print_r(strtolower($each_genre->name))?>/1"><?php print_r($each_genre->name)?></a> 
+                        <?php } 
+                    ?>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
 
 
@@ -42,18 +61,26 @@
 
 <div class="carousel-container">
     <div class="inner-carousel">
-        <div class="track">
-            @foreach($films_data->results as $film)
-                <div class="card">
-                    <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
-                    <img src="https://image.tmdb.org/t/p/w220_and_h330_face/{{$film->poster_path }}" alt="Film Poster">
-                </div>
-            @endforeach
+        <div class="carousel-track">
+        @foreach($films_data->results as $film)
+        <div class="card mx-4">
+            <a href="http://ustream.test/film/{{$film->id}}">
+            <h3 class="filmTitle font-bold">{{ $film->title }}</h3>            
+            <?php 
+                $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
+                $filmNoImg = "/img/noimg.jpg";
+                $posterExists = $film->poster_path;
+                $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
+            ?>
+            <img src="<?= $filmImg ?>" alt="Film Poster">
+            </a>
+        </div>
+    @endforeach
         </div>
     </div>
     <div class="nav">
-        <button class="prev"><img class="w-[4%] m-2" src="/img/profil.png" alt="Profil"></button>
-        <button class="next"><img class="w-[4%] m-2" src="/img/profil.png" alt="Profil"></button>
+        <button class="prev"><img class="" src="/img/larrow.svg" alt="Profil"></button>
+        <button class="next"><img class="" src="/img/rarrow.svg" alt="Profil"></button>
     </div>
 </div>
 
@@ -93,19 +120,16 @@ else{
         <div class="w-[50vw]">
             <h2 class="text-2xl font-semibold my-2">Genres</h2>
             <div class="mx-2 grid grid-cols-4 w-[100%] gap-[5%]">
-            <?php
-                $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=FR';
-                $each_genres = file_get_contents($each_genres);
-                $each_genres = json_decode($each_genres);
-                $each_genres= $each_genres->genres;
-                foreach ($each_genres as $each_genre) {
-                    
-                    ?><a href="http://ustream.test/films/<?php print_r(strtolower($each_genre->name))?>/1"><?php print_r($each_genre->name)?></a> <?php
-                    
-                }
-
-            ?>
-                
+                <?php
+                    $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=FR';
+                    $each_genres = file_get_contents($each_genres);
+                    $each_genres = json_decode($each_genres);
+                    $each_genres= $each_genres->genres;
+                    foreach ($each_genres as $each_genre) {
+                        
+                        ?><a href="http://ustream.test/films/<?php print_r(strtolower($each_genre->name))?>/1"><?php print_r($each_genre->name)?></a> 
+                    <?php } 
+                ?>
             </div>
         </div>
 </footer>
