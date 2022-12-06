@@ -25,7 +25,7 @@ body{
     color: #fff;
     visibility: hidden;
     opacity: 0;
-    padding-top: 100%;
+    padding-top: 50%;
     text-align: center;
     transition: opacity .2s, visibility .2s;
 }
@@ -35,3 +35,57 @@ body{
 }
 
 
+
+.carousel-container {
+    width: 750px;
+    margin: 50px auto;
+    position: relative;
+    border-left-width: 4px;
+    border-left-style: solid;
+    border-left-color: #aaa;
+}
+.inner-carousel {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+.track {
+    display: inline-flex;
+    height: 100%;
+    transition: transform 0.2s ease-in-out;
+}
+.card-container {
+    width: 275px;
+    height: 400px;
+    flex-shrink: 0;
+    padding-right: 10px;
+}
+
+.nav button {
+    position: absolute;
+    top: 50%;
+    transform: translatey(-50%);
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    outline: none;
+    border: 1px solid #000;
+    cursor: pointer;
+  }
+  .nav .prev {
+    left: -30px;
+    display: none;
+  }
+  .nav .prev.show {
+    display: block;
+  }
+  .nav .next {
+    right: -30px;
+  }
+  .nav .next.hide {
+    display: none;
+  }
+
+.card{
+    width: 20vw;
+}

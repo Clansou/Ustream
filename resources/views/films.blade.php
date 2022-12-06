@@ -34,6 +34,23 @@
     @endforeach
 </div>
 
+<div class="carousel-container">
+    <div class="inner-carousel">
+        <div class="track">
+            @foreach($films_data->results as $film)
+                <div class="card">
+                    <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
+                    <img src="https://image.tmdb.org/t/p/w220_and_h330_face/{{$film->poster_path }}" alt="Film Poster">
+                </div>
+            @endforeach
+        </div>
+    </div>
+    <div class="nav">
+        <button class="prev"><img class="w-[4%] m-2" src="/img/profil.png" alt="Profil"></button>
+        <button class="next"><img class="w-[4%] m-2" src="/img/profil.png" alt="Profil"></button>
+    </div>
+</div>
+
 
 <?php
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -65,12 +82,11 @@ else{
     }?>
 
 
-<footer class="bg-footer-grey text-yellow flex flex-col items-center">
-    <div class="flex items-center gap-[10%]">
+<footer class="bg-footer-grey text-yellow flex items-center gap-[10%] p-[5%]">
         <img class="w-[20%]" src="/img/logowhite.png" alt="Logo">
         <div class="w-[50vw]">
-            <h2 class="text-lg font-semibold">Genres</h2>
-            <div class="grid grid-cols-4 w-[100%] gap-[5%]">
+            <h2 class="text-2xl font-semibold my-2">Genres</h2>
+            <div class="mx-2 grid grid-cols-4 w-[100%] gap-[5%]">
                 <a href="">Action</a>
                 <a href="">Aventure</a>
                 <a href="">Animation</a>
@@ -92,10 +108,9 @@ else{
                 <a href="">Western</a>
             </div>
         </div>
-    </div>
-    <p class="p-5">Mentions légales  •  Politique de confidentialité  •  CGV</p>
 </footer>
 
 
 </body>
+<script type="text/javascript" src="/main.js"></script>
 </html>
