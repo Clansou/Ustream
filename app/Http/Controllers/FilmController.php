@@ -53,7 +53,7 @@ class FilmController extends Controller
         $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=FR';
         $each_genres = file_get_contents($each_genres);
         $each_genres = json_decode($each_genres);
-        $each_genres= $each_genres->genres;
+        $each_genres = $each_genres->genres;
         //print_r($each_genres);
         $genre_id = 0;
         foreach ($each_genres as $each_genre) {

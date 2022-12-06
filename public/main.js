@@ -12,7 +12,7 @@ next.addEventListener("click", function (e) {
   if (track.offsetWidth - index * width < index * width) {
     next.style.display = "none"
   }
-});
+})
 prev.addEventListener("click", function (e) {
   e.preventDefault()
   index = index - 1
@@ -24,5 +24,4 @@ prev.addEventListener("click", function (e) {
   if (index === 0){
     prev.style.display = "none"
   }
-  
-});
+})
