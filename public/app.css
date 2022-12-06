@@ -37,12 +37,9 @@ body{
 
 
 .carousel-container {
-    width: 750px;
+    width: 90%;
     margin: 50px auto;
     position: relative;
-    border-left-width: 4px;
-    border-left-style: solid;
-    border-left-color: #aaa;
 }
 .inner-carousel {
     width: 100%;
@@ -76,15 +73,11 @@ body{
     left: -30px;
     display: none;
   }
-  .nav .prev.show {
-    display: block;
-  }
+
   .nav .next {
     right: -30px;
   }
-  .nav .next.hide {
-    display: none;
-  }
+
 
 .card{
     width: 20vw;
