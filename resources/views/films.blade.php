@@ -66,7 +66,7 @@ $actual_link = preg_replace('/8/', '', $actual_link ); // remove numbers
 $actual_link = preg_replace('/9/', '', $actual_link ); // remove numbers
 
 if($page != 1){
-    ?><a href="<?php $actual_link ?>{{$page-1}}">Previous<?php
+    ?><a href="<?php $actual_link ?>{{$page-1}}">Previous</a><?php
     }
 
 if($films_data->total_pages >500){

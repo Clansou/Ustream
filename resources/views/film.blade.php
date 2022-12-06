@@ -11,8 +11,12 @@
 
 
 <script>
-    
-    const film_data = axios.get("https://api.themoviedb.org/3/find/{{$id_film}}&language=FR").then(res => console.log(film_data));
+    console.log({{$id_film}});
+    console.log("https://api.themoviedb.org/3/movie/{{$id_film}}?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=FRS");
+    axios.get("https://api.themoviedb.org/3/movie/{{$id_film}}?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=FRS").then(function (film_data) {
+    // handle success
+    console.log(film_data.data);
+  })
 
 </script>
 </body>
