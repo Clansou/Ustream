@@ -25,9 +25,6 @@ class FilmController extends Controller
         header('Location: http://ustream.test/films/500');
         exit();
     }
-    echo '<form method="Post" action="">';
-    echo '<input type="checkbox" name="triASC">';
-    echo '<input type="submit" name="" value="Submit"';
 
 
     $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';

@@ -12,7 +12,7 @@
 
 <script>
     
-    axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=FR").then(res => console.log(res.data.genres));
+    const film_data = axios.get("https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=FR").then(res => console.log(res.data.genres));
 
 </script>
 </body>

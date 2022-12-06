@@ -26,8 +26,10 @@
 <div class="grid grid-cols-4 justify-items-center">
     @foreach($films_data->results as $film)
         <div class="filmCard m-4 text-lg shadow-2xl flex flex-col w-[58%]">
+            <a href="http://ustream.test/film/{{$film->id}}">
             <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
             <img src="https://image.tmdb.org/t/p/w220_and_h330_face/{{$film->poster_path }}" alt="Film Poster">
+            </a>
         </div>
     @endforeach
 </div>
