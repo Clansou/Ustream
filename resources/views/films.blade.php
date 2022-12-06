@@ -10,19 +10,28 @@
 </head>
 <body>
 
-<header class="flex">
-    <h2>Bla</h2>
-    <h2>Bla</h2>
-    <h2>Bla</h2>
+<header class="flex flex-col items-center px-4 py-[10vh] bg-white shadow-2xl">
+    <div class="flex items-center justify-around">
+        <img class="w-[20%]" src="/img/logo.png" alt="Logo">
+        <div class="flex flex-row justify-end">
+            <img class="w-[4%] m-2" src="/img/profil.png" alt="Profil">
+            <img class="w-[4%] m-2" src="/img/home.png" alt="Home">
+        </div>
+    </div>
+    <input class="mt-[10vh] p-6 h-[10vh] w-[50vw] rounded-full border-2 border-black shadow-xl italic font-semibold" type="text" placeholder="Search movie...">
 </header>
 
-@foreach($films_data->results as $film)
-    <div class="filmCard p-4 text-red">
-        <h2 class="font-bold"> titre : {{ $film->title }} </h2>
-        <p> {{ $film->overview }} </p>
-        <img src="https://image.tmdb.org/t/p/original/{{$film->backdrop_path}}" alt="">
-    </div>
-@endforeach
+
+<h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top films</h2>
+<div class="grid grid-cols-4 justify-items-center">
+    @foreach($films_data->results as $film)
+        <div class="filmCard m-4 text-lg shadow-2xl flex flex-col w-[58%]">
+            <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
+            <img src="https://image.tmdb.org/t/p/w220_and_h330_face/{{$film->poster_path }}" alt="Film Poster">
+        </div>
+    @endforeach
+</div>
+
 
 <?php
 $actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
@@ -54,7 +63,36 @@ else{
     }?>
 
 
-
+<footer class="bg-footer-grey text-yellow flex flex-col items-center">
+    <div class="flex items-center gap-[10%]">
+        <img class="w-[20%]" src="/img/logowhite.png" alt="Logo">
+        <div class="w-[50vw]">
+            <h2 class="text-lg font-semibold">Genres</h2>
+            <div class="grid grid-cols-4 w-[100%] gap-[5%]">
+                <a href="">Action</a>
+                <a href="">Aventure</a>
+                <a href="">Animation</a>
+                <a href="">Comédie</a>
+                <a href="">Crime</a>
+                <a href="">Documentaire</a>
+                <a href="">Drame</a>
+                <a href="">Famille</a>
+                <a href="">Fantaisie</a>
+                <a href="">Histoire</a>
+                <a href="">Horreur</a>
+                <a href="">Musique</a>
+                <a href="">Mystère</a>
+                <a href="">Romance</a>
+                <a href="">Science Fiction</a>
+                <a href="">Téléfilm</a>
+                <a href="">Thriller</a>
+                <a href="">Guerre</a>
+                <a href="">Western</a>
+            </div>
+        </div>
+    </div>
+    <p class="p-5">Mentions légales  •  Politique de confidentialité  •  CGV</p>
+</footer>
 
 
 </body>
