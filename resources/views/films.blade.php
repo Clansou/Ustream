@@ -21,7 +21,7 @@
     <div class="flex items-center mt-[3%] gap-[5%]">
         <input class="p-6 h-[10vh] w-[50vw] rounded-full border-2 border-black shadow-xl italic font-semibold" type="text" placeholder="Search movie...">
         <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn">Genre</button>
+            <button onclick="myFunction()" class="dropbtn bg-yellow text-grey font-semibold">Genre</button>
             <div id="myDropdown" class="dropdown-content">
                 <div class="dropdown-content-genre grid grid-cols-4 w-[100%]">
                 <?php
@@ -42,7 +42,7 @@
 
 
 <h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top films</h2>
-<div class="grid grid-cols-4 justify-items-center">
+<div class="grid grid-cols-4 justify-items-center select-none">
     @foreach($films_data->results as $film)
         <div class="filmCard m-4 text-lg shadow-2xl flex flex-col w-[58%]">
             <a href="http://ustream.test/film/{{$film->id}}">
@@ -59,7 +59,7 @@
     @endforeach
 </div>
 
-<div class="carousel-container">
+<div class="carousel-container select-none">
     <div class="inner-carousel">
         <div class="carousel-track">
         @foreach($films_data->results as $film)
@@ -115,7 +115,7 @@ else{
     }?>
 
 
-<footer class="bg-footer-grey text-yellow flex items-center gap-[10%] p-[5%]">
+<footer class="bg-grey text-yellow flex items-center gap-[10%] p-[5%]">
         <img class="w-[20%]" src="/img/logowhite.png" alt="Logo">
         <div class="w-[50vw]">
             <h2 class="text-2xl font-semibold my-2">Genres</h2>
