@@ -1,7 +1,6 @@
 <?php   $actual_link = "http://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";?>
 <form method="get" action="">
 <?php
-session_start();
 
 if(isset($_GET['Search'])){
   $_SESSION['Search'] = $_GET['Search'];

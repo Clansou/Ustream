@@ -10,6 +10,7 @@
 </head>
 <body>
 <?php
+session_start();
     if(isset($_GET['Sort_by'])){
             $_SESSION['Sort_by'] = $_GET['Sort_by'];
     }
@@ -26,7 +27,6 @@
             $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
         }
     }
-
 
 
 
@@ -81,13 +81,17 @@ if(isset($_GET['Search'])){
             <option value="popularity.asc">popularity asc</option>
             <option value="name.desc">name desc</option>
             <option value="name.asc">name asc</option>
-            <option value="vote_average.desc">vote_average desc</option>
-            <option value="vote_average.asc">vote_average asc</option>
+            <option value="top_rated.desc">vote_average desc</option>
+            <option value="top_rated.asc">vote_average asc</option>
         </select>
         <input type="submit" value="Sort">
 </div>
 </form>
-<h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top films</h2>
+<?php if(isset($_SESSION['Sort_by'])){
+    ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Films by <?php echo $_SESSION['Sort_by']; ?></h2> <?php
+}else{
+    ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top films</h2><?php
+}?>
 <div class="grid grid-cols-4 justify-items-center select-none">
     @foreach($films_data->results as $film)
         <div class="filmCard m-4 text-lg shadow-2xl flex flex-col w-[58%]">
