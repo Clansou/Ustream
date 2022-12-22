@@ -26,7 +26,6 @@
             $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
         }
     }
-    print_r($api_url);
 
 
 
