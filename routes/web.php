@@ -20,6 +20,7 @@ Route::get('/', function () {
 
 Route::get('/films/{page}',[FilmController::class, 'GetMovies']);
 
+
 Route::get('/films/{genre}/{page}',[FilmController::class, 'GetMoviesByGenres']);
 
 Route::get('/film/{id_film}',[FilmController::class, 'GetMovie']);

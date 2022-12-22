@@ -17,8 +17,6 @@ class FilmController extends Controller
         exit();
         }
     //print_r($page);
-    $page_next = $page + 1;
-    $page_previous = $page -1;
 
 
     if($page > 500){
@@ -79,7 +77,7 @@ class FilmController extends Controller
 
 
 
-        $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.descx&with_genres='.$genre_id.'&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
+        $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&with_genres='.$genre_id.'&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
         $json_data = file_get_contents($api_url);
         //print_r($json_data);
         $films_data = json_decode($json_data);

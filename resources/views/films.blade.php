@@ -18,8 +18,7 @@
             <img class="w-[4%] m-2" src="/img/home.png" alt="Home">
         </div>
     </div>
-    <input class="mt-[10vh] p-6 h-[10vh] w-[50vw] rounded-full border-2 border-black shadow-xl italic font-semibold" type="text" placeholder="Search movie...">
-</header>
+    <?php require(app_path("require_resources\search.php")) ;?>
 
 
 <h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top films</h2>
