@@ -90,7 +90,7 @@ class FilmController extends Controller
 
 
 
-    return view('films',['films_data' => $films_data , 'page' => $page]);
+    return view('films',['genre_id' => $genre_id , 'page' => $page]);
     }
 
     public function GetMovie($id_film){

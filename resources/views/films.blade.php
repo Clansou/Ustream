@@ -10,19 +10,28 @@
 </head>
 <body>
 <?php
-
-
-
-
-
     if(isset($_GET['Sort_by'])){
-        $_SESSION['Sort_by'] = $_GET['Sort_by'];
+            $_SESSION['Sort_by'] = $_GET['Sort_by'];
     }
-    if(isset($_SESSION['Sort_by'])){
-        $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by='.$_SESSION['Sort_by'].'&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
+    if(isset($genre_id)){
+        if(isset($_SESSION['Sort_by'])){
+            $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by='.$_SESSION['Sort_by'].'&with_genres='.$genre_id.'&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
+        }else{
+            $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&with_genres='.$genre_id.'&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
+        }
     }else{
-        $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
+        if(isset($_SESSION['Sort_by'])){
+            $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by='.$_SESSION['Sort_by'].'&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
+        }else{
+            $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
+        }
     }
+    print_r($api_url);
+
+
+
+
+    
     $json_data = file_get_contents($api_url);
     //print_r($json_data);
     $films_data = json_decode($json_data);
@@ -69,8 +78,12 @@ if(isset($_GET['Search'])){
 <form action="" method="get">
     <div id="select">
         <select class="select" name="Sort_by">
-        <option value="popularity.desc">popularity desc</option>
-        <option value="popularity.asc">popularity asc</option>
+            <option value="popularity.desc">popularity desc</option>
+            <option value="popularity.asc">popularity asc</option>
+            <option value="name.desc">name desc</option>
+            <option value="name.asc">name asc</option>
+            <option value="vote_average.desc">vote_average desc</option>
+            <option value="vote_average.asc">vote_average asc</option>
         </select>
         <input type="submit" value="Sort">
 </div>
