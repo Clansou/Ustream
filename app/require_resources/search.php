@@ -17,13 +17,8 @@ echo '<input id="search-bar" class="mt-[10vh] p-6 h-[10vh] w-[50vw] rounded-full
 }
 ?>
 </form>
-</header>
 <?php
 
-
-if(isset($_GET['Search'])){
-display_search();
-}
 
 function display_search(){
   $_SESSION['Search'] = str_replace(" ", "+",$_SESSION['Search']);
