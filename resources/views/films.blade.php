@@ -9,7 +9,26 @@
     @vite('public/app.css')
 </head>
 <body>
+<?php
 
+$api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&with_genres='.$genre_id.'&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
+
+
+
+    if(isset($_GET['Sort_by'])){
+        $_SESSION['Sort_by'] = $_GET['Sort_by'];
+    }
+    if(isset($_SESSION['Sort_by'])){
+        $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by='.$_SESSION['Sort_by'].'&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
+    }else{
+        $api_url = 'https://api.themoviedb.org/3/discover/movie?sort_by=popularity.desc&page='.$page.'&api_key=c800206ebd27d3b6b6e7b19c646c4928';
+    }
+    $json_data = file_get_contents($api_url);
+    //print_r($json_data);
+    $films_data = json_decode($json_data);
+    //print_r($films_data);
+    
+?>
 <header class="flex flex-col items-center px-4 py-[10vh] bg-white shadow-2xl">
     <div class="flex items-center justify-around">
         <img class="w-[20%]" src="/img/logo.png" alt="Logo">
@@ -20,7 +39,16 @@
     </div>
     <?php require(app_path("require_resources\search.php")) ;?>
 
-
+<h3>Sort by</h3>
+<form action="" method="get">
+    <div id="select">
+        <select class="select" name="Sort_by">
+        <option value="popularity.desc">popularity desc</option>
+        <option value="popularity.asc">popularity asc</option>
+        </select>
+        <input type="submit" value="Sort">
+</div>
+</form>
 <h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top films</h2>
 <div class="grid grid-cols-4 justify-items-center">
     @foreach($films_data->results as $film)
