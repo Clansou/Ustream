@@ -28,14 +28,9 @@ session_start();
         }
     }
 
-
-
-    
     $json_data = file_get_contents($api_url);
-    //print_r($json_data);
     $films_data = json_decode($json_data);
-    //print_r($films_data);
-    
+
 ?>
 <header class="flex flex-col items-center px-4 py-[10vh] bg-white shadow-2xl">
     <div class="flex items-center justify-around">
@@ -52,52 +47,48 @@ session_start();
             <div id="myDropdown" class="dropdown-content">
                 <div class="dropdown-content-genre grid grid-cols-4 w-[100%]">
                 <?php
-                        $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=FR';
+                        $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
                         $each_genres = file_get_contents($each_genres);
                         $each_genres = json_decode($each_genres);
                         $each_genres= $each_genres->genres;
                         foreach ($each_genres as $each_genre) {
-                            
-                            ?><a href="http://ustream.test/films/<?php print_r(strtolower($each_genre->name))?>/1"><?php print_r($each_genre->name)?></a> 
-                        <?php } 
+
+                            ?><a href="http://ustream.test/films/<?php print_r(strtolower($each_genre->name))?>/1"><?php print_r($each_genre->name)?></a>
+                        <?php }
                     ?>
                 </div>
             </div>
         </div>
+        <form id="header-tri" action="" method="get">
+            <div id="select">
+                <select class="bg-yellow p-4 font-semibold" name="Sort_by"  onchange='if(this.value != 0) { this.form.submit(); }'>
+                    <option class="text-center bg-yellow text-grey font-semibold">-- Sort movies --</option>
+                    <option class="bg-[#f1f1f1]" value="popularity.desc">Popularity: High to Low</option>
+                    <option class="bg-[#f1f1f1]" value="popularity Asc">Popularity: Low to High</option>
+                    <option class="bg-[#f1f1f1]" value="original_title.desc">Name: desc</option>
+                    <option class="bg-[#f1f1f1]" value="original_title.asc">Name: asc</option>
+                    <option class="bg-[#f1f1f1]" value="top_rated.desc">Top rated: High to Low</option>
+                    <option class="bg-[#f1f1f1]" value="top_rated.asc">Top rated: Low to High</option>
+                </select>
+            </div>
+        </form>
     </div>
 </header>
 <?php
-if(isset($_GET['Search'])){
-    display_search();
-    }    
-?>
-
-
-<h3>Sort by</h3>
-<form action="" method="get">
-    <div id="select">
-        <select class="select" name="Sort_by">
-            <option value="popularity.desc">popularity desc</option>
-            <option value="popularity.asc">popularity asc</option>
-            <option value="name.desc">name desc</option>
-            <option value="name.asc">name asc</option>
-            <option value="top_rated.desc">vote_average desc</option>
-            <option value="top_rated.asc">vote_average asc</option>
-        </select>
-        <input type="submit" value="Sort">
-</div>
-</form>
-<?php if(isset($_SESSION['Sort_by'])){
-    ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Films by <?php echo $_SESSION['Sort_by']; ?></h2> <?php
-}else{
-    ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top films</h2><?php
+    if(isset($_GET['Search'])){
+        display_search();
+        }
+    if(isset($_SESSION['Sort_by'])){
+        ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Films by <?php echo $_SESSION['Sort_by']; ?></h2> <?php
+    }else{
+        ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top films</h2><?php
 }?>
 <div class="grid grid-cols-4 justify-items-center select-none">
     @foreach($films_data->results as $film)
         <div class="filmCard m-4 text-lg shadow-2xl flex flex-col w-[58%]">
             <a href="http://ustream.test/film/{{$film->id}}">
-            <h3 class="filmTitle font-bold">{{ $film->title }}</h3>            
-            <?php 
+            <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
+            <?php
                 $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
                 $filmNoImg = "/img/noimg.jpg";
                 $posterExists = $film->poster_path;
@@ -115,8 +106,8 @@ if(isset($_GET['Search'])){
         @foreach($films_data->results as $film)
         <div class="card mx-4">
             <a href="http://ustream.test/film/{{$film->id}}">
-            <h3 class="filmTitle font-bold">{{ $film->title }}</h3>            
-            <?php 
+            <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
+            <?php
                 $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
                 $filmNoImg = "/img/noimg.jpg";
                 $posterExists = $film->poster_path;
@@ -171,14 +162,14 @@ else{
             <h2 class="text-2xl font-semibold my-2">Genres</h2>
             <div class="mx-2 grid grid-cols-4 w-[100%] gap-[5%]">
                 <?php
-                    $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=FR';
+                    $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
                     $each_genres = file_get_contents($each_genres);
                     $each_genres = json_decode($each_genres);
                     $each_genres= $each_genres->genres;
                     foreach ($each_genres as $each_genre) {
-                        
-                        ?><a href="http://ustream.test/films/<?php print_r(strtolower($each_genre->name))?>/1"><?php print_r($each_genre->name)?></a> 
-                    <?php } 
+
+                        ?><a href="http://ustream.test/films/<?php print_r(strtolower($each_genre->name))?>/1"><?php print_r($each_genre->name)?></a>
+                    <?php }
                 ?>
             </div>
         </div>

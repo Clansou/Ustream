@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class FilmController extends Controller
 {
     public function GetMovies ($page) {
-        
+
 
 
         if(is_numeric($page)){
@@ -23,7 +23,7 @@ class FilmController extends Controller
         header('Location: http://ustream.test/films/500');
         exit();
     }
-    
+
 
 
 
@@ -41,7 +41,7 @@ class FilmController extends Controller
             exit();
         }
 
-        $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=FR';
+        $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
         $each_genres = file_get_contents($each_genres);
         $each_genres = json_decode($each_genres);
         $each_genres = $each_genres->genres;
