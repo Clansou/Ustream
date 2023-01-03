@@ -79,10 +79,10 @@ if(isset($_GET['Search'])){
         <select class="select" name="Sort_by">
             <option value="popularity.desc">popularity desc</option>
             <option value="popularity.asc">popularity asc</option>
-            <option value="name.desc">name desc</option>
-            <option value="name.asc">name asc</option>
-            <option value="top_rated.desc">vote_average desc</option>
-            <option value="top_rated.asc">vote_average asc</option>
+            <option value="original_title.desc">name desc</option>
+            <option value="original_title.asc">name asc</option>
+            <option value="top_rated.desc">top rated desc</option>
+            <option value="top_rated.asc">top rated asc</option>
         </select>
         <input type="submit" value="Sort">
 </div>
