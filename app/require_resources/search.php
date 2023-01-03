@@ -36,7 +36,13 @@ function display_search(){
           <div class="filmCard m-4 text-lg shadow-2xl flex flex-col w-[58%]">
               <a href="http://ustream.test/film/<?php echo $film->id ?>">
               <h3 class="filmTitle font-bold"><?php echo $film->title ?></h3>
-              <img src="https://image.tmdb.org/t/p/w220_and_h330_face/<?php echo $film->poster_path?>" alt="Film Poster">
+              <?php
+                $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
+                $filmNoImg = "/img/noimg.jpg";
+                $posterExists = $film->poster_path;
+                $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
+              ?>
+              <img src="<?= $filmImg ?>" alt="Film Poster">
               </a>
           </div>
       <?php } ?>
