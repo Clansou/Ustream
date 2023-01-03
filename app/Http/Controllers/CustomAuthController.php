@@ -45,30 +45,30 @@ class CustomAuthController extends Controller
            
         $data = $request->all();
         $check = $this->create($data);
-         
+        CustomAuthController::createFirstAlbum($data);
         return redirect("my_profil")->withSuccess('You have signed-in');
     }
 
-    public function createFirstAlbum(){
-        $data = array(
+    public function createFirstAlbum($data){
+        $info = array(
             'name' => "Viewed",
-            'user_id' => Auth::id(),
+            'user_email' => $data['email'],
             'state' => 1,
             'modify' => false,
         );
-        DB::table('albums')->insert($data);
-        $data = array(
+        DB::table('albums')->insert($info);
+        $info = array(
             'name' => "Wish list",
-            'user_id' => Auth::id(),
+            'user_email' => $data['email'],
             'state' => 1,
             'modify' => false,
         );
-        DB::table('albums')->insert($data);
+        DB::table('albums')->insert($info);
     }   
 
     public function create(array $data)
     {
-        CustomAuthController::createFirstAlbum();
+        
         return User::create([
         'name' => $data['name'],
         'email' => $data['email'],
