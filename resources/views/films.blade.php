@@ -43,7 +43,7 @@ session_start();
     <div class="flex items-center mt-[3%] gap-[5%]">
         <?php require(app_path("require_resources\search.php")) ;?>
         <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn bg-yellow text-grey font-semibold">Genre</button>
+            <button onclick="myFunction()" class="dropbtn bg-yellow font-semibold">Genre</button>
             <div id="myDropdown" class="dropdown-content">
                 <div class="dropdown-content-genre grid grid-cols-4 w-[100%]">
                 <?php
@@ -63,7 +63,7 @@ session_start();
             <div id="select">
                 <select class="bg-yellow p-4 font-semibold" name="Sort_by"  onchange='if(this.value != 0) { this.form.submit(); }'>
                     <option class="text-center bg-yellow text-grey font-semibold">-- Sort movies --</option>
-                    <option class="bg-[#f1f1f1]" name="bl" value="popularity.desc">Popularity: High to Low</option>
+                    <option class="bg-[#f1f1f1]" name="c" value="popularity.desc">Popularity: High to Low</option>
                     <option class="bg-[#f1f1f1]" name="bl" value="popularity Asc">Popularity: Low to High</option>
                     <option class="bg-[#f1f1f1]" name="bl" value="original_title.desc">Name: desc</option>
                     <option class="bg-[#f1f1f1]" name="bl" value="original_title.asc">Name: asc</option>
@@ -74,10 +74,11 @@ session_start();
         </form>
     </div>
 </header>
-<?php echo $_SESSION['Sort_by']?>
-print_r($_SESSION['Sort_by']);
-<?php if(isset($_SESSION['Sort_by'])){
-    ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Films by <?php echo $_SESSION['Sort_by.name']; ?></h2> <?php
+<?php if(isset($_GET['Search'])){
+    display_search();
+}
+if(isset($_SESSION['Sort_by'])){
+    ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Films by <?php echo $_SESSION['Sort_by']; ?></h2> <?php
 }else{
     ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top films</h2><?php
 }?>

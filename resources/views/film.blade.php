@@ -7,7 +7,6 @@
     <link rel="stylesheet" href="/app.css">
     @vite('public/app.css')
     <title>Document</title>
-    @vite('public/app.css')
 </head>
 <body>
 <header>
@@ -17,7 +16,7 @@
 display_search();
 }
 ?>
-  <h3 class="filmTitle font-bold">{$id_film->title}</h3>            
+  <h3 class="filmTitle font-bold">{$id_film->title}</h3>
   <?php
 
 
