@@ -74,17 +74,59 @@ $json_data = file_get_contents($api_url);
 $film = json_decode($json_data);
 //print_r($film);
 ?>
+<h2>Actor</h2>
+<div class="carousel-container select-none">
+    <div class="inner-carousel">
+        <div class="carousel-track">
 @foreach($film->cast as $character)
-    
         <?php if($character->known_for_department == "Acting" && $character->profile_path != "" ){?>
-            <div class="flex my-8">
-                <p class="">Actor name : {{$character->name}}</p>
-                <img src="https://image.tmdb.org/t/p/w220_and_h330_face/{{$character->profile_path}}" alt="">
-                <p class="">character name : {{$character->character}}</p>
+            <div class="flex mx-4">
+            <a href="">
+            <h3 class="filmTitle font-bold"> {{$character->name}}</h3>
+            <img src="https://image.tmdb.org/t/p/w220_and_h330_face/{{$character->profile_path}}" alt="Actor Image">
         </div>
+        
     <?php }?>
-    
+   
 @endforeach
+        </div>
+    </div>
+    <div class="nav">
+        <button class="prev"><img class="" src="/img/larrow.svg" alt="Profil"></button>
+        <button class="next"><img class="" src="/img/rarrow.svg" alt="Profil"></button>
+    </div>
+</div> 
+<?php
+$api_url = 'https://api.themoviedb.org/3/movie/'.$id_film.'/similar?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
+$json_data = file_get_contents($api_url);
+$film = json_decode($json_data);
+//print_r($film);
+?>
+<h2>Similar Movie</h2>
+<div class="carousel-container select-none">
+    <div class="inner-carousel">
+        <div class="carousel-track">
+@foreach($film->results as $similar_movie)
+    <div class="flex mx-4">
+        <a href="">
+        <h3 class="filmTitle font-bold">{{$similar_movie->title}} </h3>
+        <?php $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$similar_movie->poster_path}";
+        $filmNoImg = "/img/noimg.jpg";
+        $posterExists = $similar_movie->poster_path;
+        $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
+        ?>
+        <img src="<?= $filmImg ?>" alt="Film Poster">
+    </div>
+
+@endforeach
+        </div>
+    </div>
+    <div class="nav">
+        <button class="prev"><img class="" src="/img/larrow.svg" alt="Profil"></button>
+        <button class="next"><img class="" src="/img/rarrow.svg" alt="Profil"></button>
+    </div>
+</div>
 
 </body>
+<script type="text/javascript" src="/main.js"></script>
 </html>
