@@ -36,7 +36,7 @@ body{
 
 
 
-.carousel-container {
+.carousel-container, .carousel-container2 {
     width: 80%;
     margin: 50px auto;
     position: relative;
@@ -44,7 +44,7 @@ body{
 .inner-carousel {
     overflow: hidden;
 }
-.carousel-track {
+.carousel-track, .carousel-track2 {
     display: inline-flex;
     transition: transform 0.2s ease-in-out;
 }
@@ -67,6 +67,14 @@ body{
 }
 
 .nav .next {
+    right: -60px;
+}
+.nav .prev2 {
+    left: -60px;
+    display: none;
+}
+
+.nav .next2 {
     right: -60px;
 }
 

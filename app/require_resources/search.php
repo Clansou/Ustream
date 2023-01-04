@@ -20,6 +20,10 @@ echo '<input id="search-bar" class="mt-[10vh] p-6 h-[10vh] w-[50vw] rounded-full
 
 
 function display_search(){
+  if($_SESSION['Search'] == ""){
+    ?><h2 class="search-result search-h2">Aucun film trouvé</h2><?php
+  }
+  else{
   $_SESSION['Search'] = str_replace(" ", "+",$_SESSION['Search']);
   $search_api_url = 'https://api.themoviedb.org/3/search/movie?api_key=c800206ebd27d3b6b6e7b19c646c4928&query='.$_SESSION["Search"];
   $search_json_data = file_get_contents($search_api_url);
@@ -51,6 +55,7 @@ function display_search(){
   </div>
 
 <?php
+}
 }
 }
 ?>

@@ -38,7 +38,7 @@ session_start();
         <img class="w-[20%]" src="/img/logo.png" alt="Logo">
         <div class="flex flex-row justify-end">
             <img class="w-[4%] m-2" src="/img/profil.png" alt="Profil">
-            <img class="w-[4%] m-2" src="/img/home.png" alt="Home">
+            <img class="w-[4%] m-2" src="/img/logout.png" alt="Logout">
         </div>
     </div>
     <div class="flex items-center mt-[3%] gap-[5%]">
@@ -77,7 +77,9 @@ session_start();
 </header>
 <?php if(isset($_GET['Search'])){
     display_search();
-}
+}?>
+<?php //echo $_SESSION['Sort_by'];
+//print_r($_SESSION['Sort_by']);
 if(isset($_SESSION['Sort_by'])){
     ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Films by <?php echo $_SESSION['Sort_by']; ?></h2> <?php
 }else{
@@ -103,25 +105,25 @@ if(isset($_SESSION['Sort_by'])){
 <div class="carousel-container select-none">
     <div class="inner-carousel">
         <div class="carousel-track">
-        @foreach($films_data->results as $film)
-        <div class="card mx-4">
-            <a href="http://ustream.test/film/{{$film->id}}">
-            <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
-            <?php
-                $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
-                $filmNoImg = "/img/noimg.jpg";
-                $posterExists = $film->poster_path;
-                $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
-            ?>
-            <img src="<?= $filmImg ?>" alt="Film Poster">
-            </a>
-        </div>
-    @endforeach
+            @foreach($films_data->results as $film)
+                <div class="card mx-4">
+                    <a href="http://ustream.test/film/{{$film->id}}">
+                    <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
+                    <?php
+                        $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
+                        $filmNoImg = "/img/noimg.jpg";
+                        $posterExists = $film->poster_path;
+                        $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
+                    ?>
+                    <img src="<?= $filmImg ?>" alt="Film Poster">
+                    </a>
+                </div>
+            @endforeach
         </div>
     </div>
     <div class="nav">
-        <button class="prev"><img class="" src="/img/larrow.svg" alt="Profil"></button>
-        <button class="next"><img class="" src="/img/rarrow.svg" alt="Profil"></button>
+        <button class="prev"><img class="" src="/img/larrow.svg" alt="Left Arrow"></button>
+        <button class="next"><img class="" src="/img/rarrow.svg" alt="Right Arrow"></button>
     </div>
 </div>
 

@@ -26,6 +26,34 @@ prev.addEventListener("click", function (e) {
   }
 })
 
+const prev2 = document.querySelector(".prev2")
+const next2 = document.querySelector(".next2")
+const carousel2 = document.querySelector(".carousel-container2")
+const track2 = document.querySelector(".carousel-track2")
+let width2 = carousel2.offsetWidth/4
+let index2 = 0
+next2.addEventListener("click", function (e) {
+    e.preventDefault()
+    index2 = index2 + 1
+    prev2.style.display = "block"
+    track2.style.transform = "translateX(" + index2 * -width2 + "px)"
+    if (track2.offsetWidth - index2 * width2 < index2 * width2) {
+        next2.style.display = "none"
+    }
+})
+prev2.addEventListener("click", function (e) {
+    e.preventDefault()
+    index2 = index2 - 1
+    next2.style.display = "block"
+    track2.style.transform = "translateX(" + index2 * -width2 + "px)"
+    if (track2.offsetWidth - index2 * width2 < index2 * width2) {
+        prev2.style.display = "none"
+    }
+    if (index2 === 0){
+        prev2.style.display = "none"
+    }
+})
+
 
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
