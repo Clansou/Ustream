@@ -26,22 +26,31 @@ function display_search(){
   //print_r($json_data);
   $search_films_data = json_decode($search_json_data);
   if($search_films_data->total_results == 0){
-    ?><h2>Aucun film trouvé</h2><?php
+    ?><h2 class="search-result search-h2">Aucun film trouvé</h2><?php
   }
   else{
   ?>
-  <h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top research</h2>
-  <div class="grid grid-cols-4 justify-items-center">
-      <?php foreach($search_films_data->results as $film){?>
-          <div class="filmCard m-4 text-lg shadow-2xl flex flex-col w-[58%]">
-              <a href="http://ustream.test/film/<?php echo $film->id ?>">
-              <h3 class="filmTitle font-bold"><?php echo $film->title ?></h3>
-              <img src="https://image.tmdb.org/t/p/w220_and_h330_face/<?php echo $film->poster_path?>" alt="Film Poster">
-              </a>
-          </div>
-      <?php } ?>
+  <div class="search-result">
+      <h2 class="search-h2">Top research results</h2>
+      <div class="searchGrid">
+          <?php foreach(array_slice($search_films_data->results, 0, 9) as $film){?>
+              <div class="search-filmCard">
+                  <a class="flex" href="http://ustream.test/film/<?php echo $film->id ?>">
+                      <?php
+                      $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
+                      $filmNoImg = "/img/noimg.jpg";
+                      $posterExists = $film->poster_path;
+                      $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
+                      ?>
+                      <img src="<?= $filmImg ?>" alt="Film Poster">
+                      <h3><?php echo $film->title ?></h3>
+                  </a>
+              </div>
+          <?php } ?>
+      </div>
   </div>
-<?php     
+
+<?php
 }
 }
 ?>

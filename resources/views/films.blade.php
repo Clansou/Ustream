@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/public/img/favicon.png">
     <title>Ustream</title>
     <link rel="stylesheet" href="/app.css">
     @vite('public/app.css')
@@ -86,14 +87,14 @@ if(isset($_SESSION['Sort_by'])){
     @foreach($films_data->results as $film)
         <div class="filmCard m-4 text-lg shadow-2xl flex flex-col w-[58%]">
             <a href="http://ustream.test/film/{{$film->id}}">
-            <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
-            <?php
-                $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
-                $filmNoImg = "/img/noimg.jpg";
-                $posterExists = $film->poster_path;
-                $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
-            ?>
-            <img src="<?= $filmImg ?>" alt="Film Poster">
+                <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
+                <?php
+                    $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
+                    $filmNoImg = "/img/noimg.jpg";
+                    $posterExists = $film->poster_path;
+                    $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
+                ?>
+                <img src="<?= $filmImg ?>" alt="Film Poster">
             </a>
         </div>
     @endforeach
