@@ -59,7 +59,7 @@ session_start();
   //$credits = "http://api.themoviedb.org/movie/{$film->id}/credits?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN"
 ?>
 
-<div class="flex flex-col p-8 bg-yellow">
+<div class="flex flex-col p-8 bg-[#f5e5ae]">
     <div class="flex">
         <img class="w-[25vw]" src="<?= $filmImg ?>" alt="Film Poster">
         <div class="flex flex-col p-8 justify-between">
