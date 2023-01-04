@@ -77,9 +77,9 @@ session_start();
 <?php if(isset($_SESSION['Search'])){
     display_search();
 }?>
-<?php echo $_SESSION['Sort_by']?>
-print_r($_SESSION['Sort_by']);
-<?php if(isset($_SESSION['Sort_by'])){
+<?php //echo $_SESSION['Sort_by'];
+//print_r($_SESSION['Sort_by']);
+if(isset($_SESSION['Sort_by'])){
     ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Films by <?php echo $_SESSION['Sort_by']; ?></h2> <?php
 }else{
     ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top films</h2><?php
