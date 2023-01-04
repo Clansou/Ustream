@@ -120,6 +120,41 @@ select{
     -webkit-appearance: none;
     -moz-appearance: none;
 }
-option:hover{
-    background-color: #ddd;
+.search-h2{
+    font-size: xx-large;
+    color: theme('colors.yellow');
+    padding: 3% 0;
+    font-weight: bold;
+    text-align: center;
+}
+.search-result{
+    background-image: linear-gradient(90deg, white 0%, darkgrey 39%, darkgrey 61%, white 100%);
+}
+.search-result .searchGrid{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    grid-template-rows: auto;
+    justify-content: space-evenly;
+    padding-bottom: 5%;
+}
+
+.search-result .search-filmCard{
+    width: 30vw;
+    margin: 2%;
+    padding: 3%;
+    border: 3px solid theme('colors.grey');
+}
+.search-result .search-filmCard a{
+    display: flex;
+    align-items: center;
+}
+.search-result .search-filmCard:hover{
+    box-shadow: 4px 4px 10px -1px rgba(0,0,0,0.5);
+}
+.search-result .search-filmCard h3{
+    font-size: large;
+    margin-left: 3%;
+}
+.search-result img{
+    width: 7vw;
 }

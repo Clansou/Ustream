@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/public/img/favicon.png">
     <title>Ustream</title>
     <link rel="stylesheet" href="/app.css">
     @vite('public/app.css')
@@ -43,7 +44,7 @@ session_start();
     <div class="flex items-center mt-[3%] gap-[5%]">
         <?php require(app_path("require_resources\search.php")) ;?>
         <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn bg-yellow text-grey font-semibold">Genre</button>
+            <button onclick="myFunction()" class="dropbtn bg-yellow font-semibold">Genre</button>
             <div id="myDropdown" class="dropdown-content">
                 <div class="dropdown-content-genre grid grid-cols-4 w-[100%]">
                 <?php
@@ -63,7 +64,7 @@ session_start();
             <div id="select">
                 <select class="bg-yellow p-4 font-semibold" name="Sort_by"  onchange='if(this.value != 0) { this.form.submit(); }'>
                     <option class="text-center bg-yellow text-grey font-semibold">-- Sort movies --</option>
-                    <option class="bg-[#f1f1f1]" name="bl" value="popularity.desc">Popularity: High to Low</option>
+                    <option class="bg-[#f1f1f1]" name="c" value="popularity.desc">Popularity: High to Low</option>
                     <option class="bg-[#f1f1f1]" name="bl" value="popularity Asc">Popularity: Low to High</option>
                     <option class="bg-[#f1f1f1]" name="bl" value="original_title.desc">Name: desc</option>
                     <option class="bg-[#f1f1f1]" name="bl" value="original_title.asc">Name: asc</option>
@@ -74,7 +75,7 @@ session_start();
         </form>
     </div>
 </header>
-<?php if(isset($_SESSION['Search'])){
+<?php if(isset($_GET['Search'])){
     display_search();
 }?>
 <?php //echo $_SESSION['Sort_by'];
@@ -88,14 +89,14 @@ if(isset($_SESSION['Sort_by'])){
     @foreach($films_data->results as $film)
         <div class="filmCard m-4 text-lg shadow-2xl flex flex-col w-[58%]">
             <a href="http://ustream.test/film/{{$film->id}}">
-            <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
-            <?php
-                $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
-                $filmNoImg = "/img/noimg.jpg";
-                $posterExists = $film->poster_path;
-                $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
-            ?>
-            <img src="<?= $filmImg ?>" alt="Film Poster">
+                <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
+                <?php
+                    $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
+                    $filmNoImg = "/img/noimg.jpg";
+                    $posterExists = $film->poster_path;
+                    $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
+                ?>
+                <img src="<?= $filmImg ?>" alt="Film Poster">
             </a>
         </div>
     @endforeach
