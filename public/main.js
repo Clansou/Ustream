@@ -1,3 +1,18 @@
+const inputMdp = document.getElementById('password')
+const btnPass = document.getElementById('voirPass')
+if(btnPass != null){
+    btnPass.addEventListener('click', afficherMdp)
+    function afficherMdp(){
+        if(inputMdp.type === "password"){
+            btnPass.src = "img/eyeouvert.png"
+            inputMdp.type = "text"
+        }else{
+            btnPass.src = "img/eyeferme.png"
+            inputMdp.type = "password"
+        }
+    }
+}
+
 const prev = document.querySelector(".prev")
 const next = document.querySelector(".next")
 const carousel = document.querySelector(".carousel-container")

@@ -5,17 +5,21 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="icon" type="image/x-icon" href="/public/img/favicon.png">
+    <title>Login - Ustream</title>
+    <link rel="stylesheet" href="/app.css">
+    @vite('public/app.css')
 </head>
 <body>
-<main class="login-form">
-    <div class="cotainer">
+<main class="flex items-center h-[100vh] justify-evenly">
+    <img class="w-[40vw]" src="/img/logo.png" alt="Logo">
+    <div class="container login-form w-[20vw]">
         <div class="row justify-content-center">
             <div class="col-md-4">
-                <div class="card">
-                    <h3 class="card-header text-center">Login</h3>
-                    <div class="card-body">
-                        <form method="POST" action="{{ route('login.custom') }}">
+                <div class="flex flex-col items-center bg-yellow rounded-2xl p-8 text-grey">
+                    <h3 class="card-header text-center text-4xl mb-5 font-bold">Login</h3>
+                    <div class="card-body text-xl">
+                        <form class="flex flex-col gap-3" method="POST" action="{{ route('login.custom') }}">
                             @csrf
                             <div class="form-group mb-3">
                                 <input type="text" placeholder="Email" id="email" class="form-control" name="email" required
@@ -24,8 +28,9 @@
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                                 @endif
                             </div>
-                            <div class="form-group mb-3">
+                            <div class="form-group mb-3 flex">
                                 <input type="password" placeholder="Password" id="password" class="form-control" name="password" required>
+                                <img class="w-[15%]" src="img/eyeferme.png" alt="afficher mot de passe" id="voirPass">
                                 @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                                 @endif
@@ -38,7 +43,7 @@
                                 </div>
                             </div>
                             <div class="d-grid mx-auto">
-                                <button type="submit" class="btn btn-dark btn-block">Signin</button>
+                                <button type="submit" class="btn btn-dark btn-block font-semibold bg-white border-2 border-grey rounded-full px-8 py-2 hover:bg-grey hover:text-yellow">Sign in</button>
                             </div>
                         </form>
                     </div>
@@ -48,4 +53,5 @@
     </div>
 </main>
 </body>
+<script type="text/javascript" src="/main.js"></script>
 </html>

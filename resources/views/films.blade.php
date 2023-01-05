@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/public/img/favicon.png">
-    <title>Ustream-Home</title>
+    <title>Home - Ustream</title>
     <link rel="stylesheet" href="/app.css">
     @vite('public/app.css')
 </head>
@@ -35,10 +35,16 @@ session_start();
 ?>
 <header class="flex flex-col items-center px-4 py-[10vh] bg-white shadow-2xl">
     <div class="flex items-center justify-around">
-        <img class="w-[20%]" src="/img/logo.png" alt="Logo">
-        <div class="flex flex-row justify-end">
-            <img class="w-[4%] m-2" src="/img/profil.png" alt="Profil">
-            <img class="w-[4%] m-2" src="/img/logout.png" alt="Logout">
+        <a class="w-[20%]" href="http://ustream.test/films/1">
+            <img src="/img/logo.png" alt="Logo">
+        </a>
+        <div class="flex flex-row justify-end gap-8">
+            <a class="w-[5%]" href="http://ustream.test/my_profil">
+                <img class="m-2" src="/img/profil.png" alt="Profil">
+            </a>
+            <a class="w-[5%]" href="http://ustream.test/signout">
+                <img class="m-2" src="/img/logout.png" alt="Logout">
+            </a>
         </div>
     </div>
     <div class="flex items-center mt-[3%] gap-[5%]">
