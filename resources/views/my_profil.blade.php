@@ -15,6 +15,19 @@
     @foreach($albums as $album)
         <div class="album">
             <h3>{{$album->name}}</h3>
+            <?php
+            $films= DB::table('films_in_albums')
+            ->where('albums_id', $album->id)
+            ->get()->all();
+            foreach($films as $film){
+                $api_url = 'https://api.themoviedb.org/3/movie/'.$film->films_id.'?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
+                $json_data = file_get_contents($api_url);
+                $film = json_decode($json_data);
+                print_r($film);
+            }
+           
+            ?>
+
         </div>
     @endforeach
 </body>
