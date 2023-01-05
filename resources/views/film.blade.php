@@ -17,8 +17,8 @@ session_start();
     <div class="flex items-center justify-around">
         <img class="w-[20%]" src="/img/logo.png" alt="Logo">
         <div class="flex flex-row justify-end">
-            <img class="w-[4%] m-2" src="/img/profil.png" alt="Profil">
-            <img class="w-[4%] m-2" src="/img/logout.png" alt="Logout">
+            <a class="w-10"href="{{ route('/my_profil') }}"><img class="w-[80%] m-2" src="/img/profil.png" alt="Profil"></a>
+            <a class="w-10"href="/"><img class="w-[80%] m-2" src="/img/home.png" alt="Home"></a>
         </div>
     </div>
     <div class="flex items-center mt-[3%] gap-[5%]">
@@ -46,7 +46,10 @@ session_start();
     display_search();
 }?>
 
+
+<h3 class="filmTitle font-bold">{$id_film->title}</h3>
 <?php
+
 
   $api_url = 'https://api.themoviedb.org/3/movie/'.$id_film.'?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
   $json_data = file_get_contents($api_url);
@@ -55,127 +58,75 @@ session_start();
   $filmNoImg = "/img/noimg.jpg";
   $posterExists = $film->poster_path;
   $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
-
-  //$credits = "http://api.themoviedb.org/movie/{$film->id}/credits?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN"
 ?>
-
-<div class="flex flex-col p-8 bg-yellow">
-    <div class="flex">
-        <img class="w-[25vw]" src="<?= $filmImg ?>" alt="Film Poster">
-        <div class="flex flex-col p-8 justify-between">
-            <div class="flex items-center justify-between">
-                <div class="flex flex-col">
-                    <h3 class="font-bold text-3xl text-grey border-t-8 border-l-8 border-grey p-8">{{ $film->title }}</h3>
-                    <div class="flex justify-between mt-2 w-[20vw]">
-                        <p class=""><strong class=" text-grey">Release date:</strong>  {{ $film->release_date }}</p>
-                        <p class="font-bold text-grey">{{ $film->runtime }}min</p>
-                    </div>
-                </div>
-                <div class="flex items-center gap-4">
-                    <p class="font-bold text-grey text-large">Users' Rank</p>
-                    <div class="flex flex-col items-center p-4 rounded-full border-4 border-grey bg-green-600">
-                        <p class="font-bold">{{ $film->vote_average }}</p>
-                    </div>
-
-                </div>
-
-            </div>
-            <p class="">{{ $film->overview }}</p>
-            <div class="flex justify-between items-center">
-                <div class="flex flex-col">
-                    <p class="font-bold text-grey">Genres:</p>
-                    <div class="flex gap-4 w-[50vw]">
-                        @foreach($film->genres as $each_genre)
-                            <p class="flex before:content-['-']">{{ $each_genre->name }}</p>
-                        @endforeach
-                    </div>
-                </div>
-                <div class="border-b-8 border-r-8 border-grey p-4">
-                    <button class="addMovieBtn" type="button">
-                        <img class="w-[20%] m-2" src="/img/addmovie.png" alt="Add Movie To Playslist">
-                    </button>
-                </div>
-            </div>
+<img src="<?= $filmImg ?>" alt="Film Poster">
+<h3 class="font-bold">{{ $film->title }}</h3>
+<p class="">{{ $film->release_date }}</p>
+<p class="">{{ $film->runtime }}</p>
+<p class="">{{ $film->overview }}</p>
+<p class="">{{ $film->vote_average }}</p>
+@foreach($film->genres as $each_genre)
+    <p class="">{{ $each_genre->name }}</p>
+@endforeach
+<?php
+$api_url = 'https://api.themoviedb.org/3/movie/'.$id_film.'/credits?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
+$json_data = file_get_contents($api_url);
+$film = json_decode($json_data);
+//print_r($film);
+?>
+<h2>Actor</h2>
+<div class="carousel-container select-none">
+    <div class="inner-carousel">
+        <div class="carousel-track">
+@foreach($film->cast as $character)
+        <?php if($character->known_for_department == "Acting" && $character->profile_path != "" ){?>
+            <div class="flex mx-4">
+            <a href="">
+            <h3 class="filmTitle font-bold"> {{$character->name}}</h3>
+            <img src="https://image.tmdb.org/t/p/w220_and_h330_face/{{$character->profile_path}}" alt="Actor Image">
+        </div>
+        
+    <?php }?>
+   
+@endforeach
         </div>
     </div>
-
-    <div class="actors">
-        <?php
-        $api_url = 'https://api.themoviedb.org/3/movie/'.$id_film.'/credits?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
-        $json_data = file_get_contents($api_url);
-        $film = json_decode($json_data);
-        ?>
-        <h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Actors</h2>
-        <div class="carousel-container select-none">
-            <div class="inner-carousel">
-                <div class="carousel-track">
-                    @foreach($film->cast as $character)
-                            <?php if($character->known_for_department == "Acting" && $character->profile_path != "" ){?>
-                        <div class="card w-[7vw!important] mx-4">
-                            <h3 class="filmTitle font-bold"> {{$character->name}}</h3>
-                            <img src="https://image.tmdb.org/t/p/w220_and_h330_face/{{$character->profile_path}}" alt="Actor Image">
-                        </div>
-                        <?php }?>
-                    @endforeach
-                </div>
-            </div>
-            <div class="nav">
-                <button class="prev"><img class="" src="/img/larrow.svg" alt="Profil"></button>
-                <button class="next"><img class="" src="/img/rarrow.svg" alt="Profil"></button>
-            </div>
-        </div>
+    <div class="nav">
+        <button class="prev"><img class="" src="/img/larrow.svg" alt="Profil"></button>
+        <button class="next"><img class="" src="/img/rarrow.svg" alt="Profil"></button>
     </div>
-</div>
-
-
+</div> 
 <?php
 $api_url = 'https://api.themoviedb.org/3/movie/'.$id_film.'/similar?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
 $json_data = file_get_contents($api_url);
 $film = json_decode($json_data);
 //print_r($film);
 ?>
-<h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Similar Movies</h2>
-<div class="carousel-container2 select-none">
+<h2>Similar Movie</h2>
+<div class="carousel-container select-none">
     <div class="inner-carousel">
-        <div class="carousel-track2">
-            @foreach($film->results as $similar_movie)
-                <div class="card mx-4">
-                    <a href="http://ustream.test/film/{{$similar_movie->id}}">
-                        <h3 class="filmTitle font-bold">{{$similar_movie->title}} </h3>
-                            <?php $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$similar_movie->poster_path}";
-                                $filmNoImg = "/img/noimg.jpg";
-                                $posterExists = $similar_movie->poster_path;
-                                $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
-                            ?>
-                        <img src="<?= $filmImg ?>" alt="Film Poster">
-                    </a>
-                </div>
-            @endforeach
+        <div class="carousel-track">
+@foreach($film->results as $similar_movie)
+    <div class="flex mx-4">
+        <a href="">
+        <h3 class="filmTitle font-bold">{{$similar_movie->title}} </h3>
+        <?php $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$similar_movie->poster_path}";
+        $filmNoImg = "/img/noimg.jpg";
+        $posterExists = $similar_movie->poster_path;
+        $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
+        ?>
+        <img src="<?= $filmImg ?>" alt="Film Poster">
+    </div>
+
+@endforeach
         </div>
     </div>
     <div class="nav">
-        <button class="prev2"><img class="" src="/img/larrow.svg" alt="Left Arrow"></button>
-        <button class="next2"><img class="" src="/img/rarrow.svg" alt="Right Arrow"></button>
+        <button class="prev"><img class="" src="/img/larrow.svg" alt="Profil"></button>
+        <button class="next"><img class="" src="/img/rarrow.svg" alt="Profil"></button>
     </div>
 </div>
-<footer class="bg-grey text-yellow flex items-center gap-[10%] p-[5%]">
-    <img class="w-[20%]" src="/img/logowhite.png" alt="Logo">
-    <div class="w-[50vw]">
-        <h2 class="text-2xl font-semibold my-2">Genres</h2>
-        <div class="mx-2 grid grid-cols-4 w-[100%] gap-[5%]">
-            <?php
-            $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
-            $each_genres = file_get_contents($each_genres);
-            $each_genres = json_decode($each_genres);
-            $each_genres= $each_genres->genres;
-            foreach ($each_genres as $each_genre) {
 
-                ?><a href="http://ustream.test/films/<?php print_r(strtolower($each_genre->name))?>/1"><?php print_r($each_genre->name)?></a>
-            <?php }
-            ?>
-        </div>
-    </div>
-</footer>
 </body>
 <script type="text/javascript" src="/main.js"></script>
 </html>
