@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FilmController;
 use App\Http\Controllers\CustomAuthController;
+use App\Http\Controllers\AlbumController;
 
 /*
 |--------------------------------------------------------------------------
@@ -31,3 +32,6 @@ Route::post('/custom-login', [CustomAuthController::class, 'customLogin'])->name
 Route::get('/registration', [CustomAuthController::class, 'registration'])->name('register-user');
 Route::post('/custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom'); 
 Route::get('/signout', [CustomAuthController::class, 'signOut'])->name('signout');
+
+
+Route::delete('/delete_film_in_album/{id}', [AlbumController::class, 'delete_film_in_album'])->name('delete_film_in_album'); 
