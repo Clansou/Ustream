@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/public/img/favicon.png">
-    <title>Ustream</title>
+    <title>Ustream-Home</title>
     <link rel="stylesheet" href="/app.css">
     @vite('public/app.css')
 </head>
@@ -65,12 +65,12 @@ session_start();
             <div id="select">
                 <select class="bg-yellow p-4 font-semibold" name="Sort_by"  onchange='if(this.value != 0) { this.form.submit(); }'>
                     <option class="text-center bg-yellow text-grey font-semibold">-- Sort movies --</option>
-                    <option class="bg-[#f1f1f1]" name="c" value="popularity.desc">Popularity: High to Low</option>
-                    <option class="bg-[#f1f1f1]" name="bl" value="popularity Asc">Popularity: Low to High</option>
-                    <option class="bg-[#f1f1f1]" name="bl" value="original_title.desc">Name: desc</option>
-                    <option class="bg-[#f1f1f1]" name="bl" value="original_title.asc">Name: asc</option>
-                    <option class="bg-[#f1f1f1]" name="bl" value="top_rated.desc">Top rated: High to Low</option>
-                    <option class="bg-[#f1f1f1]" name="bl" value="top_rated.asc">Top rated: Low to High</option>
+                    <option class="bg-[#f1f1f1]" value="popularity.desc">Popularity: High to Low</option>
+                    <option class="bg-[#f1f1f1]" value="popularity.asc">Popularity: Low to High</option>
+                    <option class="bg-[#f1f1f1]" value="original_title.desc">Name: A to Z</option>
+                    <option class="bg-[#f1f1f1]" value="original_title.asc">Name: Z to A</option>
+                    <option class="bg-[#f1f1f1]" value="top_rated.desc">Top rated: High to Low</option>
+                    <option class="bg-[#f1f1f1]" value="top_rated.asc">Top rated: Low to High</option>
                 </select>
             </div>
         </form>
@@ -82,7 +82,21 @@ session_start();
 <?php //echo $_SESSION['Sort_by'];
 //print_r($_SESSION['Sort_by']);
 if(isset($_SESSION['Sort_by'])){
-    ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Films by <?php echo $_SESSION['Sort_by']; ?></h2> <?php
+    $sortBy = $_SESSION['Sort_by'];
+    if($_SESSION['Sort_by'] == "popularity.desc"){
+        $sortBy = "Popularity: High to Low";
+    }elseif ($_SESSION['Sort_by'] == "popularity.asc"){
+        $sortBy = "Popularity: Low to High";
+    }elseif ($_SESSION['Sort_by'] == "original_title.desc"){
+        $sortBy = "Name: A to Z";
+    }elseif ($_SESSION['Sort_by'] == "original_title.asc"){
+        $sortBy = "Name: Z to A";
+    }elseif ($_SESSION['Sort_by'] == "top_rated.desc"){
+        $sortBy = "Top rated: High to Low";
+    }else{
+        $sortBy = "Top rated: Low to High";
+    }
+    ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Films by <?php echo $sortBy; ?></h2> <?php
 }else{
     ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top films</h2><?php
 }?>
@@ -130,34 +144,23 @@ if(isset($_SESSION['Sort_by'])){
 
 
 <?php
-$actual_link = (isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] === 'on' ? "https" : "http") . "://$_SERVER[HTTP_HOST]$_SERVER[REQUEST_URI]";
-$actual_link = preg_replace('/0/', '', $actual_link ); // remove numbers
-$actual_link = preg_replace('/1/', '', $actual_link ); // remove numbers
-$actual_link = preg_replace('/2/', '', $actual_link ); // remove numbers
-$actual_link = preg_replace('/3/', '', $actual_link ); // remove numbers
-$actual_link = preg_replace('/4/', '', $actual_link ); // remove numbers
-$actual_link = preg_replace('/5/', '', $actual_link ); // remove numbers
-$actual_link = preg_replace('/6/', '', $actual_link ); // remove numbers
-$actual_link = preg_replace('/7/', '', $actual_link ); // remove numbers
-$actual_link = preg_replace('/8/', '', $actual_link ); // remove numbers
-$actual_link = preg_replace('/9/', '', $actual_link ); // remove numbers
-
-if($page != 1){
-    ?><a href="<?php $actual_link ?>{{$page-1}}">Previous </a><?php
-    }
-
 if($films_data->total_pages >500){
     $max_page = 500;
 }
 else{
     $max_page = $films_data->total_pages;
-}
-
+} ?>
+<?php ?>
+<?php ?>
+<div class="text-[18px] text-grey my-8 flex gap-4 justify-center">
+    <?php if($page != 1){?>
+        <a href="<?php $actual_link ?>{{$page-1}}"><span class="text-yellow">🡨</span> Previous Page</a><?php
+    }
 
     if($page != $max_page){
-    ?><a href="<?php $actual_link ?>{{$page+1}}"> Next</a><?php
+      ?><a href="<?php $actual_link ?>{{$page+1}}">Next Page <span class="text-yellow">🡪</span></a><?php
     }?>
-
+</div>
 
 <footer class="bg-grey text-yellow flex items-center gap-[10%] p-[5%]">
         <img class="w-[20%]" src="/img/logowhite.png" alt="Logo">

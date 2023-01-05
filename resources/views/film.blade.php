@@ -59,36 +59,44 @@ session_start();
   $posterExists = $film->poster_path;
   $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
 ?>
-<img src="<?= $filmImg ?>" alt="Film Poster">
-<h3 class="font-bold">{{ $film->title }}</h3>
-<p class="">{{ $film->release_date }}</p>
-<p class="">{{ $film->runtime }}</p>
-<p class="">{{ $film->overview }}</p>
-<p class="">{{ $film->vote_average }}</p>
-@foreach($film->genres as $each_genre)
-    <p class="">{{ $each_genre->name }}</p>
-@endforeach
-<?php
-$api_url = 'https://api.themoviedb.org/3/movie/'.$id_film.'/credits?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
-$json_data = file_get_contents($api_url);
-$film = json_decode($json_data);
-//print_r($film);
-?>
-<h2>Actor</h2>
-<div class="carousel-container select-none">
-    <div class="inner-carousel">
-        <div class="carousel-track">
-@foreach($film->cast as $character)
-        <?php if($character->known_for_department == "Acting" && $character->profile_path != "" ){?>
-            <div class="flex mx-4">
-            <a href="">
-            <h3 class="filmTitle font-bold"> {{$character->name}}</h3>
-            <img src="https://image.tmdb.org/t/p/w220_and_h330_face/{{$character->profile_path}}" alt="Actor Image">
-        </div>
-        
-    <?php }?>
-   
-@endforeach
+
+<div class="flex flex-col p-8 bg-[#f5e5ae]">
+    <div class="flex">
+        <img class="w-[25vw]" src="<?= $filmImg ?>" alt="Film Poster">
+        <div class="flex flex-col p-8 justify-between">
+            <div class="flex items-center justify-between">
+                <div class="flex flex-col">
+                    <h3 class="font-bold text-3xl text-grey border-t-8 border-l-8 border-grey p-8">{{ $film->title }}</h3>
+                    <div class="flex justify-between mt-2 w-[20vw]">
+                        <p class=""><strong class=" text-grey">Release date:</strong>  {{ $film->release_date }}</p>
+                        <p class="font-bold text-grey">{{ $film->runtime }}min</p>
+                    </div>
+                </div>
+                <div class="flex items-center gap-4">
+                    <p class="font-bold text-grey text-large">Users' Rank</p>
+                    <div class="flex flex-col items-center p-4 rounded-full border-4 border-grey bg-green-600">
+                        <p class="font-bold">{{ $film->vote_average }}</p>
+                    </div>
+
+                </div>
+
+            </div>
+            <p class="">{{ $film->overview }}</p>
+            <div class="flex justify-between items-center">
+                <div class="flex flex-col">
+                    <p class="font-bold text-grey">Genres:</p>
+                    <div class="flex gap-4 w-[50vw]">
+                        @foreach($film->genres as $each_genre)
+                            <p class="flex before:content-['-']">{{ $each_genre->name }}</p>
+                        @endforeach
+                    </div>
+                </div>
+                <div class="border-b-8 border-r-8 border-grey p-4">
+                    <button class="addMovieBtn" type="button">
+                        <img class="w-[20%] m-2" src="/img/addmovie.png" alt="Add Movie To Playslist">
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
     <div class="nav">
