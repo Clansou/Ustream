@@ -12,5 +12,10 @@
     <h2><?php echo Auth::user()->name?></h2>
     <h3><?php echo Auth::user()->email?></h3>
     
+    @foreach($albums as $album)
+        <div class="album">
+            <h3>{{$album->name}}</h3>
+        </div>
+    @endforeach
 </body>
 </html>
