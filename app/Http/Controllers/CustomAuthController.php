@@ -45,21 +45,24 @@ class CustomAuthController extends Controller
            
         $data = $request->all();
         $check = $this->create($data);
-        CustomAuthController::createFirstAlbum($data);
+        CustomAuthController::createFirstAlbum($check);
         return redirect("my_profil")->withSuccess('You have signed-in');
     }
 
-    public function createFirstAlbum($data){
+    public function createFirstAlbum($check){
+        
         $info = array(
             'name' => "Viewed",
-            'user_email' => $data['email'],
+            'user_id'=> $check['id'],
+            'user_email' => $check['email'],
             'state' => 1,
             'modify' => false,
         );
         DB::table('albums')->insert($info);
         $info = array(
             'name' => "Wish list",
-            'user_email' => $data['email'],
+            'user_id'=> $check['id'],
+            'user_email' => $check['email'],
             'state' => 1,
             'modify' => false,
         );
@@ -77,15 +80,24 @@ class CustomAuthController extends Controller
       
     }
     
-    
+    public function get_albums($id)
+    {
+        return DB::table('albums')->select()
+        ->where('user_id' ,  '=' ,  $id)
+        ->get()->all();;
+
+    }
     public function my_profil()
     {
         if(Auth::check()){
-            return view('my_profil');
+            $id = Auth::id();
+            $albums = CustomAuthController::get_albums($id);
+            return view('my_profil', compact('albums'));
         }
   
         return redirect("login")->withSuccess('You are not allowed to access');
     }
+    
     
     public function signOut() {
         Session::flush();

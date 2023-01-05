@@ -53,7 +53,7 @@ session_start();
             <button onclick="myFunction()" class="dropbtn bg-yellow font-semibold">Genre</button>
             <div id="myDropdown" class="dropdown-content">
                 <div class="dropdown-content-genre grid grid-cols-4 w-[100%]">
-                <?php
+                    <?php
                         $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
                         $each_genres = file_get_contents($each_genres);
                         $each_genres = json_decode($each_genres);

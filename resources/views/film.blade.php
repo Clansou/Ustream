@@ -52,7 +52,10 @@ session_start();
     display_search();
 }?>
 
+
+<h3 class="filmTitle font-bold">{$id_film->title}</h3>
 <?php
+
 
   $api_url = 'https://api.themoviedb.org/3/movie/'.$id_film.'?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
   $json_data = file_get_contents($api_url);
@@ -61,8 +64,6 @@ session_start();
   $filmNoImg = "/img/noimg.jpg";
   $posterExists = $film->poster_path;
   $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
-
-  //$credits = "http://api.themoviedb.org/movie/{$film->id}/credits?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN"
 ?>
 
 <div class="flex flex-col p-8 bg-[#f5e5ae]">
@@ -104,7 +105,6 @@ session_start();
             </div>
         </div>
     </div>
-
     <div class="actors">
         <?php
         $api_url = 'https://api.themoviedb.org/3/movie/'.$id_film.'/credits?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
@@ -133,7 +133,6 @@ session_start();
     </div>
 </div>
 
-
 <?php
 $api_url = 'https://api.themoviedb.org/3/movie/'.$id_film.'/similar?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
 $json_data = file_get_contents($api_url);
@@ -149,9 +148,9 @@ $film = json_decode($json_data);
                     <a href="http://ustream.test/film/{{$similar_movie->id}}">
                         <h3 class="filmTitle font-bold">{{$similar_movie->title}} </h3>
                             <?php $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$similar_movie->poster_path}";
-                                $filmNoImg = "/img/noimg.jpg";
-                                $posterExists = $similar_movie->poster_path;
-                                $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
+                            $filmNoImg = "/img/noimg.jpg";
+                            $posterExists = $similar_movie->poster_path;
+                            $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
                             ?>
                         <img src="<?= $filmImg ?>" alt="Film Poster">
                     </a>
@@ -164,6 +163,7 @@ $film = json_decode($json_data);
         <button class="next2"><img class="" src="/img/rarrow.svg" alt="Right Arrow"></button>
     </div>
 </div>
+
 <footer class="bg-grey text-yellow flex items-center gap-[10%] p-[5%]">
     <img class="w-[20%]" src="/img/logowhite.png" alt="Logo">
     <div class="w-[50vw]">
@@ -182,6 +182,7 @@ $film = json_decode($json_data);
         </div>
     </div>
 </footer>
+
 </body>
 <script type="text/javascript" src="/main.js"></script>
 </html>
