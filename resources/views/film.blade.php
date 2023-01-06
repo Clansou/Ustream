@@ -1,3 +1,9 @@
+<?php
+    $api_url = 'https://api.themoviedb.org/3/movie/'.$id_film.'?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
+    $json_data = file_get_contents($api_url);
+    $film = json_decode($json_data);
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,7 +11,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="/public/img/favicon.png">
-    <title>Ustream</title>
+    <title><?= $film->title ?> - Ustream</title>
     <link rel="stylesheet" href="/app.css">
     @vite('public/app.css')
 </head>
@@ -55,11 +61,6 @@ session_start();
 
 <h3 class="filmTitle font-bold">{$id_film->title}</h3>
 <?php
-
-
-  $api_url = 'https://api.themoviedb.org/3/movie/'.$id_film.'?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
-  $json_data = file_get_contents($api_url);
-  $film = json_decode($json_data);
   $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
   $filmNoImg = "/img/noimg.jpg";
   $posterExists = $film->poster_path;
@@ -105,6 +106,8 @@ session_start();
             </div>
         </div>
     </div>
+
+
     <div class="actors">
         <?php
         $api_url = 'https://api.themoviedb.org/3/movie/'.$id_film.'/credits?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';

@@ -47,11 +47,9 @@
     <?php if(isset($_GET['Search'])){
         display_search();
     }?>
-    <li class="nav-item">
-        <a class="nav-link" href="{{ route('signout') }}">Logout</a>
-    </li>
-    <h1><?php echo Auth::user()->id?></h1>
-    <h2><?php echo Auth::user()->name?></h2>
+
+
+    <h2 class="text-6xl text-yellow font-bold">Hello <?php echo Auth::user()->name?> !</h2>
     <h3><?php echo Auth::user()->email?></h3>
 
     @foreach($albums as $album)
