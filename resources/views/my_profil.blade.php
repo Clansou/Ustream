@@ -18,9 +18,11 @@
                 <a class="w-[5%]" href="http://ustream.test/my_profil">
                     <img class="m-2" src="/img/profil.png" alt="Profil">
                 </a>
+                <?php if(Auth::check()){ ?>
                 <a class="w-[5%]" href="http://ustream.test/signout">
                     <img class="m-2" src="/img/logout.png" alt="Logout">
                 </a>
+                <?php } ?>
             </div>
         </div>
         <div class="flex items-center mt-[3%] gap-[5%]">
