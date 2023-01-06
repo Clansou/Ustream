@@ -105,9 +105,9 @@ if(isset($_SESSION['Sort_by'])){
 }else{
     ?><h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Top films</h2><?php
 }?>
-<div class="grid grid-cols-4 justify-items-center select-none">
+<div class="gridFilms justify-items-center select-none">
     @foreach($films_data->results as $film)
-        <div class="filmCard m-4 text-lg shadow-2xl flex flex-col w-[58%]">
+        <div class="filmCard m-4 text-lg shadow-2xl flex flex-col">
             <a href="http://ustream.test/film/{{$film->id}}">
                 <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
                 <?php

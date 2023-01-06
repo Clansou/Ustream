@@ -29,12 +29,12 @@ function display_search(){
       $search_json_data = file_get_contents($search_api_url);
       $search_films_data = json_decode($search_json_data);
       if($search_films_data->total_results == 0){
-        ?><h2 class="search-result search-h2">Aucun film trouvé</h2><?php
+        ?><h2 class="search-result search-h2">No movie found</h2><?php
       }else{?>
           <div class="search-result">
               <h2 class="search-h2">Top research results</h2>
               <div class="searchGrid">
-                  <?php foreach(array_slice($search_films_data->results, 0, 9) as $film){?>
+                  <?php foreach(array_slice($search_films_data->results, 0, 99) as $film){?>
                       <div class="search-filmCard">
                           <a class="flex" href="http://ustream.test/film/<?php echo $film->id ?>">
                               <?php
