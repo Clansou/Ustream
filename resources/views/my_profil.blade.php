@@ -50,6 +50,11 @@
         display_search();
     }?>
 
+    <div class="justify-around">
+        <a href="http://ustream.test/my_profil">My profil</a>
+        <a href="http://ustream.test/MyInvitations">My invitation</a>
+        <a href="http://ustream.test/allprofils">All profils</a>
+    </div>
 
     <h2 class="text-6xl text-yellow font-bold">Hello <?php echo Auth::user()->name?> !</h2>
     <h3><?php echo Auth::user()->email?></h3>
@@ -111,6 +116,25 @@
             <option value="0">Private</option>
         </select>
         <button type="submit" class="btn btn-dark btn-block font-semibold bg-white border-2 border-grey rounded-full px-8 py-2 hover:bg-grey hover:text-yellow">Create Album</button>
-    </form>                          
+    </form>
+    <h3>Share an album</h3>
+    <form class="flex flex-col gap-3" method="post" action="{{ route('Share_Album') }}">
+    @csrf
+        <select type="text" id="id_album" class="form-control" name="id_album" required autofocus>  
+            <?php   $my_albums= DB::table('albums')
+            ->where('user_id', Auth::user()->id)
+            ->get()->all();
+            foreach($my_albums as $my_album){?>
+            <option value="<?php echo $my_album->id ?>"> <?php echo $my_album->name ?></option><?php }?>
+        </select>
+        <select type="text" id="id_user" class="form-control" name="id_user" required autofocus>  
+            <?php   $all_users= DB::table('users')
+            ->where("id", "!=" , Auth::user()->id)
+            ->get()->all();
+            foreach($all_users as $user){?>
+            <option value="<?php echo $user->id ?>"> <?php echo $user->email ?></option><?php }?>
+        </select>
+        <button type="submit" class="btn btn-dark btn-block font-semibold bg-white border-2 border-grey rounded-full px-8 py-2 hover:bg-grey hover:text-yellow">Share Album</button>
+    </form>                             
 </body>
 </html>

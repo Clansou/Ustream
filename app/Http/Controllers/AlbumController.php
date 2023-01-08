@@ -33,9 +33,17 @@ class AlbumController extends Controller
             if($album = DB::table('albums')->insertGetId($info)){
                 app('App\Http\Controllers\CustomAuthController')->link_user_album(Auth::user()->id,$album);
                 return redirect("my_profil")->withSuccess('Album Create');
-
             };
             
+        };
+    }
+    public function ShareAlbum(Request $request){
+        $info = array(
+            'user_id' => $request['id_user'],
+            'albums_id' => $request['id_album']
+        );
+        if($album = DB::table('albums_user_id')->insertGetId($info)){
+            return redirect("my_profil")->withSuccess('Album Share');
         };
     }
 }
