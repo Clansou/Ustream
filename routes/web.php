@@ -17,10 +17,22 @@ use App\Http\Controllers\AlbumController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    header('Location: /films/1');
+    exit();
+});
+Route::get('/films', function () {
+    header('Location: /films/1');
+    exit();
+});
+Route::get('/film', function () {
+    header('Location: /films/1');
+    exit();
 });
 
 Route::get('/films/{page}',[FilmController::class, 'GetMovies']);
+Route::get('/allprofils',function(){
+    return view('allprofil');
+});
 
 Route::get('/films/{genre}/{page}',[FilmController::class, 'GetMoviesByGenres']);
 
