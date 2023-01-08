@@ -34,4 +34,5 @@ Route::post('/custom-registration', [CustomAuthController::class, 'customRegistr
 Route::get('/signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
 
+Route::post('/Create_Album', [AlbumController::class, 'CreateAlbum'])->name('Create_Album');
 Route::delete('/delete_film_in_album/{id}', [AlbumController::class, 'delete_film_in_album'])->name('delete_film_in_album'); 

@@ -54,21 +54,29 @@ class CustomAuthController extends Controller
         $info = array(
             'name' => "Viewed",
             'user_id'=> $check['id'],
-            'user_email' => $check['email'],
-            'state' => 1,
-            'modify' => false,
+            'Is_public' => True,
         );
-        DB::table('albums')->insert($info);
+        $album = DB::table('albums')->insertGetId($info);
+        CustomAuthController::link_user_album($check['id'],$album);
         $info = array(
             'name' => "Wish list",
             'user_id'=> $check['id'],
-            'user_email' => $check['email'],
-            'state' => 1,
-            'modify' => false,
+            'Is_public' => True,
+            
         );
-        DB::table('albums')->insert($info);
-    }   
+        $album = DB::table('albums')->insertGetId($info);
+        CustomAuthController::link_user_album($check['id'],$album);
+        
 
+    }   
+    public function link_user_album($user_id,$album_id){
+        $info = array(
+            'albums_id' => $album_id,
+            'user_id' => $user_id,
+        );
+        DB::table('albums_user_id')->insert($info);
+
+    }
     public function create(array $data)
     {
         
@@ -82,7 +90,8 @@ class CustomAuthController extends Controller
     
     public function get_albums($id)
     {
-        return DB::table('albums')->select()
+        return DB::table('albums')
+        ->select()
         ->where('user_id' ,  '=' ,  $id)
         ->get()->all();;
 

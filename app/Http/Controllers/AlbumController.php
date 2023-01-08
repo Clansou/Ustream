@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use Illuminate\Support\Facades\Auth;
 class AlbumController extends Controller
 {
     public function add_film_in_album($id){
@@ -18,5 +19,23 @@ class AlbumController extends Controller
 
         return redirect("my_profil")
         ->withSuccess(__('Film deleted successfully.'));
+    }
+    public function CreateAlbum(Request $request){
+        if($request->validate([
+            'Name' => 'required',
+            'Is_public' => 'required',
+        ])){
+            $info = array(
+                'name' => $request['Name'],
+                'user_id'=> Auth::user()->id,
+                'Is_public' => $request['Is_public'],
+            );
+            if($album = DB::table('albums')->insertGetId($info)){
+                app('App\Http\Controllers\CustomAuthController')->link_user_album(Auth::user()->id,$album);
+                return redirect("my_profil")->withSuccess('Album Create');
+
+            };
+            
+        };
     }
 }
