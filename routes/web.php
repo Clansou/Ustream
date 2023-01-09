@@ -47,6 +47,7 @@ Route::get('/allprofils',function(){
     return view('allprofil');
 });
 Route::get('/profil/{id}',[CustomAuthController::class,'getProfil']);
+Route::get('/MyInvitations',[CustomAuthController::class,'getInvitation']);
 
 
 Route::post('/Create_Album', [AlbumController::class, 'CreateAlbum'])->name('Create_Album');

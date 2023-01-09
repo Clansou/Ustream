@@ -7,13 +7,6 @@ use DB;
 use Illuminate\Support\Facades\Auth;
 class AlbumController extends Controller
 {
-    /*public function add_film_in_album($id){
-        DB::table('films_in_albums')->insert($id);
-
-        return redirect("my_profil")
-            ->withSuccess(__('Film added successfully.'));
-    }*/
-
     public function add_film_in_album(Request $request){
         $info = array(
             'films_id' => $request['id_film'],
@@ -52,9 +45,11 @@ class AlbumController extends Controller
             'user_id' => $request['id_user'],
             'albums_id' => $request['id_album']
         );
-        if(DB::table('albums_user_id')->insert($info)){
-            return redirect("my_profil")->withSuccess('Album Shared');
-        };
+        if($request['Accept'] == 1){
+            DB::table('albums_user_id')->insert($info);
+        }
+        DB::table('invitation')->delete($request['id']);
+        return redirect("my_profil")->withSuccess('Album Shared');
     }
     public function InviteAlbum(Request $request){
         $info = array(

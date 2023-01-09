@@ -96,6 +96,14 @@ class CustomAuthController extends Controller
         ->get()->all();
 
     }
+    public function getInvitation(){
+        if(Auth::check()){
+            return view('Myinvitation');
+        }
+        else{
+            return redirect("login")->withSuccess('You are not allowed to access');
+        }   
+    }
     public function my_profil()
     {
         if(Auth::check()){
