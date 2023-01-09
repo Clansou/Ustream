@@ -11,10 +11,10 @@
 </head>
 <body>
 <main class="flex items-center h-[100vh] justify-evenly flex-col md:flex-row">
-    <img class="w-[40vw]" src="/img/logo.png" alt="Logo">
+    <img class="w-[80vw] md:w-[40vw]" src="/img/logo.png" alt="Logo">
     <div class="container signup-form md:w-[20vw] w-[80vw]">
         <div class="row justify-content-center">
-            <div class="col-md-4">
+            <div class="flex flex-col items-center">
                 <div class="flex flex-col items-center bg-yellow rounded-2xl p-8 text-grey">
                     <h3 class="card-header text-center text-4xl mb-5 font-bold">Registration</h3>
                     <div class="card-body text-xl">
@@ -53,6 +53,7 @@
                         </form>
                     </div>
                 </div>
+                <p class="mt-2 text-grey">Already registered? <a class="font-semibold underline" href="http://ustream.test/login">Log in now!</a></p>
             </div>
         </div>
     </div>
