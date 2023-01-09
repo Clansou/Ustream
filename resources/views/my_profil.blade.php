@@ -68,18 +68,32 @@
             <?php
             $films= DB::table('films_in_albums')
             ->where('albums_id', $album->id)
-            ->get()->all();
-            foreach($films as $film_in_album){
-                $api_url = 'https://api.themoviedb.org/3/movie/'.$film_in_album->films_id.'?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
-                $json_data = file_get_contents($api_url);
-                $film = json_decode($json_data);
-                print_r($film);
-                print_r($film_in_album->id);
-                ?>{!!Form::open(['url' => ['delete_film_in_album',$film_in_album->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
-                {{Form::hidden('_method', 'DELETE')}}
-                {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-                {!!Form::close()!!}<?php
-            }?>
+            ->get()->all(); ?>
+            <div class="gridFilms justify-items-center select-none">
+                    <?php foreach($films as $film_in_album){
+
+                        $api_url = 'https://api.themoviedb.org/3/movie/'.$film_in_album->films_id.'?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
+                        $json_data = file_get_contents($api_url);
+                        $film = json_decode($json_data);
+                        ?>
+                        <div class="filmCard m-4 text-lg shadow-2xl flex flex-col">
+                            <a href="http://ustream.test/film/{{$film->id}}">
+                                <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
+                                    <?php
+                                    $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
+                                    $filmNoImg = "/img/noimg.jpg";
+                                    $posterExists = $film->poster_path;
+                                    $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
+                                    ?>
+                                <img src="<?= $filmImg ?>" alt="Film Poster">
+                            </a>
+                        </div>
+                        {!!Form::open(['url' => ['delete_film_in_album',$film_in_album->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+                        {{Form::hidden('_method', 'DELETE')}}
+                        {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+                        {!!Form::close()!!}
+                    <?php } ?>
+            </div>
         </div>
     @endforeach
     <h3>Album shared with me</h3>
@@ -89,6 +103,9 @@
         ->where('albums.user_id' ,  '!=' ,  Auth::user()->id)
         ->where('albums_user_id.user_id' ,  '=' ,  Auth::user()->id)
         ->get()->all(); ?>
+
+
+
     @foreach($albums_share as $album)
         <div class="album">
             <h3>{{$album->name}}</h3>

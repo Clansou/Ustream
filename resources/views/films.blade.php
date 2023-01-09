@@ -126,7 +126,7 @@ if(isset($_SESSION['Sort_by'])){
     @endforeach
 </div>
 
-<div class="carousel-container select-none">
+<!--<div class="carousel-container select-none">
     <div class="inner-carousel">
         <div class="carousel-track">
             @foreach($films_data->results as $film)
@@ -149,7 +149,7 @@ if(isset($_SESSION['Sort_by'])){
         <button class="prev"><img class="" src="/img/larrow.svg" alt="Left Arrow"></button>
         <button class="next"><img class="" src="/img/rarrow.svg" alt="Right Arrow"></button>
     </div>
-</div>
+</div>-->
 
 
 <?php

@@ -14,6 +14,16 @@ class AlbumController extends Controller
             ->withSuccess(__('Film added successfully.'));
     }
 
+    public function add_film_in_album(Request $request){
+        $info = array(
+            'film_id' => $request['id_user'],
+            'albums_id' => $request['id_album']
+        );
+        if(DB::table('albums_user_id')->insert($info)){
+            return redirect("my_profil")->withSuccess('Album Shared');
+        };
+    }
+
     public function delete_film_in_album($id){
         DB::table('films_in_albums')->delete($id);
 
@@ -34,7 +44,7 @@ class AlbumController extends Controller
                 app('App\Http\Controllers\CustomAuthController')->link_user_album(Auth::user()->id,$album);
                 return redirect("my_profil")->withSuccess('Album Create');
             };
-            
+
         };
     }
     public function ShareAlbum(Request $request){
@@ -43,7 +53,7 @@ class AlbumController extends Controller
             'albums_id' => $request['id_album']
         );
         if(DB::table('albums_user_id')->insert($info)){
-            return redirect("my_profil")->withSuccess('Album Share');
+            return redirect("my_profil")->withSuccess('Album Shared');
         };
     }
     public function LikeAlbum(Request $request){
@@ -63,7 +73,5 @@ class AlbumController extends Controller
                 };
             }
         }
-
-        
     }
 }

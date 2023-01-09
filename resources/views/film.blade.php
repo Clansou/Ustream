@@ -101,6 +101,10 @@ session_start();
                     </div>
                 </div>
                 <div class="border-b-8 border-r-8 border-grey p-4">
+                    {{--{!!Form::open(['url' => ['add_film_in_album',$film->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+                    {{Form::hidden('_method', 'INSERT')}}
+                    {{Form::submit('Add', ['class' => 'btn btn-danger'])}}
+                    {!!Form::close()!!}--}}
                     <button class="addMovieBtn" type="button">
                         <img class="w-[70px] m-2" src="/img/addmovie.png" alt="Add Movie To Playslist">
                     </button>
