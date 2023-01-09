@@ -43,8 +43,10 @@ class AlbumController extends Controller
             'albums_id' => $request['id_album']
         );
         if(DB::table('albums_user_id')->insert($info)){
+            DB::table('invitation')->delete($request['id']);
             return redirect("my_profil")->withSuccess('Album Shared');
         };
+        return redirect("my_profil")->withSuccess('Error');
     }
     public function InviteAlbum(Request $request){
         $info = array(
