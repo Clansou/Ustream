@@ -101,16 +101,33 @@ session_start();
                     </div>
                 </div>
                 <div class="border-b-8 border-r-8 border-grey p-4">
-                    {{--{!!Form::open(['url' => ['add_film_in_album',$film->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
-                    {{Form::hidden('_method', 'INSERT')}}
-                    {{Form::submit('Add', ['class' => 'btn btn-danger'])}}
-                    {!!Form::close()!!}--}}
                     <button class="addMovieBtn" type="button">
                         <img class="w-[70px] m-2" src="/img/addmovie.png" alt="Add Movie To Playslist">
                     </button>
                 </div>
             </div>
         </div>
+    </div>
+
+
+    <div class="w-[80vw] md:w-[40vw] bg-yellow rounded-2xl p-8 text-grey mb-8">
+        <h3 class="text-xl font-semibold mb-2">Share an album</h3>
+        <form class="flex flex-col gap-3" method="post" action="{{ route('add_film_in_album') }}">
+            @csrf
+            <select type="text" id="id_album" class="form-control" name="id_album" required autofocus>
+                <option value="Album Name">Album Name</option>
+                <?php   $my_albums= DB::table('albums')
+                    ->where('user_id', Auth::user()->id)
+                    ->get()->all();
+                foreach($my_albums as $my_album){?>
+                <option value="<?php echo $my_album->id ?>"> <?php echo $my_album->name ?></option><?php }?>
+            </select>
+            {!!Form::open(['url' => ['add_film_in_album',$film->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+            {{Form::hidden('_method', 'POST')}}
+            {{Form::submit('Add', ['class' => 'btn btn-danger'])}}
+            {!!Form::close()!!}
+            <button type="submit" class="btn btn-dark btn-block font-semibold bg-white border-2 border-grey text-grey rounded-full px-8 py-2 hover:bg-grey hover:text-yellow">Share Album</button>
+        </form>
     </div>
 
     <div class="actors">

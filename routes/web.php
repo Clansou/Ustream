@@ -36,11 +36,11 @@ Route::get('/films/{page}',[FilmController::class, 'GetMovies']);
 
 
 
-Route::get('/my_profil', [CustomAuthController::class, 'my_profil'])->name('/my_profil'); 
+Route::get('/my_profil', [CustomAuthController::class, 'my_profil'])->name('/my_profil');
 Route::get('/login', [CustomAuthController::class, 'index'])->name('/login');
-Route::post('/custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom'); 
+Route::post('/custom-login', [CustomAuthController::class, 'customLogin'])->name('login.custom');
 Route::get('/registration', [CustomAuthController::class, 'registration'])->name('register-user');
-Route::post('/custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom'); 
+Route::post('/custom-registration', [CustomAuthController::class, 'customRegistration'])->name('register.custom');
 Route::get('/signout', [CustomAuthController::class, 'signOut'])->name('signout');
 
 Route::get('/allprofils',function(){
@@ -53,4 +53,5 @@ Route::post('/Create_Album', [AlbumController::class, 'CreateAlbum'])->name('Cre
 Route::post('/Share_Album', [AlbumController::class, 'ShareAlbum'])->name('Share_Album');
 Route::post('/Invite_Album', [AlbumController::class, 'InviteAlbum'])->name('Invite_Album');
 Route::post('/Like_Album', [AlbumController::class, 'LikeAlbum'])->name('Like_Album');
-Route::delete('/delete_film_in_album/{id}', [AlbumController::class, 'delete_film_in_album'])->name('delete_film_in_album'); 
+Route::delete('/delete_film_in_album/{id}', [AlbumController::class, 'delete_film_in_album'])->name('delete_film_in_album');
+Route::post('/add_film_in_album', [AlbumController::class, 'add_film_in_album'])->name('add_film_in_album');

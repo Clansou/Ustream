@@ -16,11 +16,11 @@ class AlbumController extends Controller
 
     public function add_film_in_album(Request $request){
         $info = array(
-            'film_id' => $request['id_user'],
+            'films_id' => $request['id_film'],
             'albums_id' => $request['id_album']
         );
-        if(DB::table('albums_user_id')->insert($info)){
-            return redirect("my_profil")->withSuccess('Album Shared');
+        if(DB::table('films_in_albums')->insert($info)){
+            return redirect("my_profil")->withSuccess('Album Added');
         };
     }
 
