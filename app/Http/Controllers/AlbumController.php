@@ -14,16 +14,6 @@ class AlbumController extends Controller
             ->withSuccess(__('Film added successfully.'));
     }
 
-    public function add_film_in_album(Request $request){
-        $info = array(
-            'film_id' => $request['id_user'],
-            'albums_id' => $request['id_album']
-        );
-        if(DB::table('albums_user_id')->insert($info)){
-            return redirect("my_profil")->withSuccess('Album Shared');
-        };
-    }
-
     public function delete_film_in_album($id){
         DB::table('films_in_albums')->delete($id);
 
