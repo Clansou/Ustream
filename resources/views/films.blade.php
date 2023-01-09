@@ -34,28 +34,29 @@ session_start();
 
 ?>
 <header class="flex flex-col items-center px-4 py-[10vh] bg-white shadow-2xl">
-    <div class="flex items-center justify-around">
-        <a class="w-[20%]" href="http://ustream.test/films/1">
+    <div class="flex items-center justify-between w-full">
+        <a class="sm:w-[350px] w-[300px] ml-8" href="http://ustream.test/films/1">
             <img src="/img/logo.png" alt="Logo">
         </a>
-        <div class="flex flex-row justify-end gap-8">
-            <a class="w-[5%]" href="http://ustream.test/my_profil">
+        <div class="flex flex-row justify-end gap-4 mr-8">
+            <a class="w-[50px]" href="http://ustream.test/my_profil">
                 <img class="m-2" src="/img/profil.png" alt="Profil">
             </a>
             <?php if(Auth::check()){ ?>
-            <a class="w-[5%]" href="http://ustream.test/signout">
+            <a class="w-[50px]" href="http://ustream.test/signout">
                 <img class="m-2" src="/img/logout.png" alt="Logout">
             </a>
             <?php } ?>
         </div>
     </div>
-    <div class="flex items-center mt-[3%] gap-[5%]">
+    <div class="flex flex-col items-center mt-[3%] gap-8 md:flex-row">
         <?php require(app_path("require_resources\search.php")) ;?>
-        <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn bg-yellow font-semibold">Genre</button>
-            <div id="myDropdown" class="dropdown-content">
-                <div class="dropdown-content-genre grid grid-cols-4 w-[100%]">
-                    <?php
+        <div class="flex gap-8">
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn bg-yellow font-semibold">Genre</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <div class="dropdown-content-genre grid grid-cols-4 w-[100%]">
+                        <?php
                         $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
                         $each_genres = file_get_contents($each_genres);
                         $each_genres = json_decode($each_genres);
@@ -64,23 +65,24 @@ session_start();
 
                             ?><a href="http://ustream.test/films/<?php print_r(strtolower($each_genre->name))?>/1"><?php print_r($each_genre->name)?></a>
                         <?php }
-                    ?>
+                        ?>
+                    </div>
                 </div>
             </div>
+            <form id="header-tri" action="" method="get">
+                <div id="select">
+                    <select class="bg-yellow p-4 font-semibold" name="Sort_by"  onchange='if(this.value != 0) { this.form.submit(); }'>
+                        <option class="text-center bg-yellow text-grey font-semibold">-- Sort movies --</option>
+                        <option class="bg-[#f1f1f1]" value="popularity.desc">Popularity: High to Low</option>
+                        <option class="bg-[#f1f1f1]" value="popularity.asc">Popularity: Low to High</option>
+                        <option class="bg-[#f1f1f1]" value="original_title.desc">Name: A to Z</option>
+                        <option class="bg-[#f1f1f1]" value="original_title.asc">Name: Z to A</option>
+                        <option class="bg-[#f1f1f1]" value="top_rated.desc">Top rated: High to Low</option>
+                        <option class="bg-[#f1f1f1]" value="top_rated.asc">Top rated: Low to High</option>
+                    </select>
+                </div>
+            </form>
         </div>
-        <form id="header-tri" action="" method="get">
-            <div id="select">
-                <select class="bg-yellow p-4 font-semibold" name="Sort_by"  onchange='if(this.value != 0) { this.form.submit(); }'>
-                    <option class="text-center bg-yellow text-grey font-semibold">-- Sort movies --</option>
-                    <option class="bg-[#f1f1f1]" value="popularity.desc">Popularity: High to Low</option>
-                    <option class="bg-[#f1f1f1]" value="popularity.asc">Popularity: Low to High</option>
-                    <option class="bg-[#f1f1f1]" value="original_title.desc">Name: A to Z</option>
-                    <option class="bg-[#f1f1f1]" value="original_title.asc">Name: Z to A</option>
-                    <option class="bg-[#f1f1f1]" value="top_rated.desc">Top rated: High to Low</option>
-                    <option class="bg-[#f1f1f1]" value="top_rated.asc">Top rated: Low to High</option>
-                </select>
-            </div>
-        </form>
     </div>
 </header>
 <?php if(isset($_GET['Search'])){
@@ -169,9 +171,9 @@ else{
     }?>
 </div>
 
-<footer class="bg-grey text-yellow flex items-center gap-[10%] p-[5%]">
-        <img class="w-[20%]" src="/img/logowhite.png" alt="Logo">
-        <div class="w-[50vw]">
+<footer class="bg-grey text-yellow flex flex-col md:flex-row items-center gap-[10%] p-[5%]">
+        <img class="w-[200px]" src="/img/logowhite.png" alt="Logo">
+        <div class="md:w-[50vw] w-[80vw]">
             <h2 class="text-2xl font-semibold my-2">Genres</h2>
             <div class="mx-2 grid grid-cols-4 w-[100%] gap-[5%]">
                 <?php

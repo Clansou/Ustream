@@ -10,9 +10,9 @@
     @vite('public/app.css')
 </head>
 <body>
-<main class="flex items-center h-[100vh] justify-evenly">
+<main class="flex items-center h-[100vh] justify-evenly flex-col md:flex-row">
     <img class="w-[40vw]" src="/img/logo.png" alt="Logo">
-    <div class="container signup-form w-[20vw]">
+    <div class="container signup-form md:w-[20vw] w-[80vw]">
         <div class="row justify-content-center">
             <div class="col-md-4">
                 <div class="flex flex-col items-center bg-yellow rounded-2xl p-8 text-grey">
@@ -34,10 +34,10 @@
                                 <span class="text-danger">{{ $errors->first('email') }}</span>
                                 @endif
                             </div>
-                            <div class="form-group mb-3 flex">
+                            <div class="form-group mb-3 flex items-center">
                                 <input type="password" placeholder="Password" id="password" class="form-control"
                                     name="password" required>
-                                <img class="w-[15%]" src="img/eyeferme.png" alt="afficher mot de passe" id="voirPass">
+                                <img class="w-[35px]" src="img/eyeferme.png" alt="afficher mot de passe" id="voirPass">
                                 @if ($errors->has('password'))
                                 <span class="text-danger">{{ $errors->first('password') }}</span>
                                 @endif
