@@ -50,12 +50,13 @@
         display_search();
     }?>
 
-    <div class="justify-around">
-        <a href="http://ustream.test/my_profil">My profil</a>
-        <a href="http://ustream.test/MyInvitations">My invitation</a>
-        <a href="http://ustream.test/allprofils">All profils</a>
+    <<div class="flex justify-around text-3xl font-bold my-8 text-center">
+        <a class="bg-lightGrey border-2 border-grey px-8 py-2 hover:bg-grey hover:text-yellow" href="http://ustream.test/my_profil">My profil</a>
+        <a class="bg-lightGrey border-2 border-grey px-8 py-2 hover:bg-grey hover:text-yellow" href="http://ustream.test/MyInvitations">My invitation</a>
+        <a class="bg-lightGrey border-2 border-grey px-8 py-2 hover:bg-grey hover:text-yellow" href="http://ustream.test/allprofils">All profils</a>
     </div>
-    <h1>Profil of <?php echo $user_info->name ?></h1>
+
+    <h1 class="text-6xl text-yellow font-bold text-center my-4">Profil of <?php echo $user_info->name ?></h1>
     <p>Email : <?php echo $user_info->email ?></p>
     <h2>Album of  <?php echo $user_info->name ?></h2>
     <?php
