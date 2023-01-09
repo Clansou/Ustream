@@ -51,5 +51,6 @@ Route::get('/profil/{id}',[CustomAuthController::class,'getProfil']);
 
 Route::post('/Create_Album', [AlbumController::class, 'CreateAlbum'])->name('Create_Album');
 Route::post('/Share_Album', [AlbumController::class, 'ShareAlbum'])->name('Share_Album');
+Route::post('/Invite_Album', [AlbumController::class, 'InviteAlbum'])->name('Invite_Album');
 Route::post('/Like_Album', [AlbumController::class, 'LikeAlbum'])->name('Like_Album');
 Route::delete('/delete_film_in_album/{id}', [AlbumController::class, 'delete_film_in_album'])->name('delete_film_in_album'); 
