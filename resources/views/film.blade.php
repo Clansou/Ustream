@@ -75,7 +75,7 @@ session_start();
     <div class="flex flex-col md:flex-row items-center">
         <img class="md:w-[25vw] w-[50vw]" src="<?= $filmImg ?>" alt="Film Poster">
         <div class="flex flex-col p-8 justify-between">
-            <div class="flex items-center justify-between">
+            <div class="flex flex-col md:flex-row items-center justify-between">
                 <div class="flex flex-col">
                     <h3 class="font-bold text-3xl text-grey border-t-8 border-l-8 border-grey p-8">{{ $film->title }}</h3>
                     <div class="flex justify-between mt-2 w-[20vw] flex-col md:flex-row">
@@ -90,8 +90,8 @@ session_start();
                     </div>
                 </div>
             </div>
-            <p class="">{{ $film->overview }}</p>
-            <div class="flex justify-between items-center">
+            <p class="my-4">{{ $film->overview }}</p>
+            <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="flex flex-col">
                     <p class="font-bold text-grey">Genres:</p>
                     <div class="flex gap-4 w-[50vw]">
@@ -101,23 +101,31 @@ session_start();
                     </div>
                 </div>
                 <div class="border-b-8 border-r-8 border-grey p-4">
-                    <div class="w-[80vw] md:w-[40vw] bg-yellow rounded-2xl p-8 text-grey mb-8">
-                        <form class="flex flex-col gap-3" method="post" action="{{ route('add_film_in_album') }}">
+                    <?php if(Auth::check()){ ?>
+
+
+                        <form class="flex gap-3" method="post" action="{{ route('add_film_in_album') }}">
                             @csrf
-                            <select type="text" id="id_album" class="form-control" name="id_album" required autofocus>
-                                <?php
-                                $my_albums= DB::table('albums')
-                                    ->where('user_id', Auth::user()->id)
-                                    ->get()->all();
-                                foreach($my_albums as $my_album){?>
-                                <option value="<?php echo $my_album->id ?>"> <?php echo $my_album->name ?></option><?php }?>
-                            </select>
-                            <input id="id_film" name="id_film" type="hidden" value="<?= $film->id ?>">
-                            <button class="addMovieBtn" type="submit">
-                                <img class="w-[70px] m-2" src="/img/addmovie.png" alt="Add Movie To Playslist">
-                            </button>
+                            <div class="flex flex-col gap-3">
+                                <p class="font-bold text-grey text-large">Add to an album:</p>
+                                <select type="text" id="id_album" class="form-control px-4 py-2" name="id_album" required autofocus>
+                                        <?php
+                                        $my_albums= DB::table('albums')
+                                            ->where('user_id', Auth::user()->id)
+                                            ->get()->all();
+                                    foreach($my_albums as $my_album){?>
+                                    <option value="<?php echo $my_album->id ?>"> <?php echo $my_album->name ?></option><?php }?>
+                                </select>
+                            </div>
+                            <div class="">
+                                <input id="id_film" name="id_film" type="hidden" value="<?= $film->id ?>">
+                                <button class="addMovieBtn" type="submit">
+                                    <img class="w-[70px] m-2" src="/img/addmovie.png" alt="Add Movie To Playslist">
+                                </button>
+                            </div>
+
                         </form>
-                    </div>
+                    <?php } ?>
                 </div>
             </div>
         </div>

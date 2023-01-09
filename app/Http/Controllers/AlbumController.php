@@ -13,7 +13,7 @@ class AlbumController extends Controller
             'albums_id' => $request['id_album']
         );
         if(DB::table('films_in_albums')->insert($info)){
-            return redirect("my_profil")->withSuccess('Album Added');
+            return redirect()->back()->withSuccess('Album Added');
         };
     }
 
