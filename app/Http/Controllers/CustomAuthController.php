@@ -93,7 +93,7 @@ class CustomAuthController extends Controller
         return DB::table('albums')
         ->select()
         ->where('user_id' ,  '=' ,  $id)
-        ->get()->all();;
+        ->get()->all();
 
     }
     public function my_profil()
@@ -113,5 +113,16 @@ class CustomAuthController extends Controller
         Auth::logout();
   
         return Redirect('login');
+    }
+    public function getProfil($id){
+        if($user_info = DB::table('users')
+        ->select()
+        ->where('id' ,  '=' ,  $id)
+        ->first()){
+            return view('profil',['user_info' => $user_info]);
+        }
+        return redirect("login")->withSuccess('Not found');
+        
+        
     }
 }

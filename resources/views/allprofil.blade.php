@@ -62,7 +62,7 @@
     ->get()->all();
     
     foreach($users as $user){
-    ?> <a href="/profil<?php echo $user->id ?>"><?php echo $user->name;?><br><?php echo $user->email; ?><br></a>
+    ?> <a href="/profil/<?php echo $user->id ?>"><?php echo $user->name;?><br><?php echo $user->email; ?><br></a>
     <?php } ?>
     
 </body>

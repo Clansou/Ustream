@@ -42,8 +42,28 @@ class AlbumController extends Controller
             'user_id' => $request['id_user'],
             'albums_id' => $request['id_album']
         );
-        if($album = DB::table('albums_user_id')->insertGetId($info)){
+        if(DB::table('albums_user_id')->insert($info)){
             return redirect("my_profil")->withSuccess('Album Share');
         };
+    }
+    public function LikeAlbum(Request $request){
+        if(Auth::check()){
+            $liked = DB::table('_liked__album')->where('user_id', '=' ,  Auth::user()->id)->where('albums_id', '=', $request['album_id'])->count();
+            if($liked>=1){
+                DB::table('_liked__album')->where('user_id', '=' ,  Auth::user()->id)->where('albums_id', '=', $request['album_id'])->delete();
+                return redirect()->back();
+            }
+            else{
+                $info = array(
+                    'user_id' => Auth::user()->id,
+                    'albums_id' => $request['album_id']
+                );
+                if(DB::table('_liked__album')->insert($info)){
+                    return redirect()->back();
+                };
+            }
+        }
+
+        
     }
 }
