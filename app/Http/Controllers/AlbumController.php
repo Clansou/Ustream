@@ -56,6 +56,18 @@ class AlbumController extends Controller
             return redirect("my_profil")->withSuccess('Album Shared');
         };
     }
+    public function InviteAlbum(Request $request){
+        $info = array(
+            'albums_id' => $request['id_album'],
+            'user_id_inviter' => Auth::user()->id,
+            'user_id_invited' => $request['id_user'],
+            
+        );
+        if(DB::table('invitation')->insert($info)){
+            return redirect("my_profil")->withSuccess('Album Share');
+        };
+
+    }
     public function LikeAlbum(Request $request){
         if(Auth::check()){
             $liked = DB::table('_liked__album')->where('user_id', '=' ,  Auth::user()->id)->where('albums_id', '=', $request['album_id'])->count();

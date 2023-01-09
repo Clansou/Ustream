@@ -142,7 +142,7 @@
 
         <div class="w-[80vw] md:w-[40vw] bg-yellow rounded-2xl p-8 text-grey mb-8">
             <h3 class="text-xl font-semibold mb-2">Share an album</h3>
-            <form class="flex flex-col gap-3" method="post" action="{{ route('Share_Album') }}">
+            <form class="flex flex-col gap-3" method="post" action="{{ route('Invite_Album') }}">
                 @csrf
                 <select type="text" id="id_album" class="form-control" name="id_album" required autofocus>
                     <option value="Album Name">Album Name</option>
