@@ -139,14 +139,23 @@ select{
     font-weight: bold;
     text-align: center;
 }
+#search-bar{
+    height: 10vh;
+    padding: 1.5rem;
+    border: 2px solid black;
+    --tw-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+    --tw-shadow-colored: 0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);
+    box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
 .search-result{
     background-image: linear-gradient(90deg, white 0%, darkgrey 39%, darkgrey 61%, white 100%);
 }
 .search-result .searchGrid{
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
     grid-template-rows: auto;
     justify-content: space-evenly;
+    justify-items: center;
     padding-bottom: 5%;
 }
 
@@ -155,6 +164,11 @@ select{
     margin: 2%;
     padding: 3%;
     border: 3px solid theme('colors.grey');
+}
+@media (max-width: 715px){
+    .search-result .search-filmCard{
+        width: 80vw;
+    }
 }
 .search-result .search-filmCard a{
     display: flex;
@@ -173,4 +187,9 @@ select{
 
 .addMovieBtn{
     text-align: -webkit-right;
+}
+
+.allProfilGrid{
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
 }

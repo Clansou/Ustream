@@ -20,37 +20,39 @@
 session_start();
 ?>
 <header class="flex flex-col items-center px-4 py-[10vh] bg-white shadow-2xl">
-    <div class="flex items-center justify-around">
-        <a class="w-[20%]" href="http://ustream.test/films/1">
+    <div class="flex items-center justify-between w-full">
+        <a class="sm:w-[350px] w-[300px] ml-8" href="http://ustream.test/films/1">
             <img src="/img/logo.png" alt="Logo">
         </a>
-        <div class="flex flex-row justify-end gap-8">
-            <a class="w-[5%]" href="http://ustream.test/my_profil">
+        <div class="flex flex-row justify-end gap-4 mr-8">
+            <a class="w-[50px]" href="http://ustream.test/my_profil">
                 <img class="m-2" src="/img/profil.png" alt="Profil">
             </a>
             <?php if(Auth::check()){ ?>
-            <a class="w-[5%]" href="http://ustream.test/signout">
+            <a class="w-[50px]" href="http://ustream.test/signout">
                 <img class="m-2" src="/img/logout.png" alt="Logout">
             </a>
             <?php } ?>
         </div>
     </div>
-    <div class="flex items-center mt-[3%] gap-[5%]">
+    <div class="flex flex-col items-center mt-[3%] gap-8 md:flex-row">
         <?php require(app_path("require_resources\search.php")) ;?>
-        <div class="dropdown">
-            <button onclick="myFunction()" class="dropbtn bg-yellow font-semibold">Genre</button>
-            <div id="myDropdown" class="dropdown-content">
-                <div class="dropdown-content-genre grid grid-cols-4 w-[100%]">
-                    <?php
-                    $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
-                    $each_genres = file_get_contents($each_genres);
-                    $each_genres = json_decode($each_genres);
-                    $each_genres= $each_genres->genres;
-                    foreach ($each_genres as $each_genre) {
+        <div class="flex gap-8">
+            <div class="dropdown">
+                <button onclick="myFunction()" class="dropbtn bg-yellow font-semibold">Genre</button>
+                <div id="myDropdown" class="dropdown-content">
+                    <div class="dropdown-content-genre grid grid-cols-4 w-[100%]">
+                        <?php
+                        $each_genres = 'https://api.themoviedb.org/3/genre/movie/list?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
+                        $each_genres = file_get_contents($each_genres);
+                        $each_genres = json_decode($each_genres);
+                        $each_genres= $each_genres->genres;
+                        foreach ($each_genres as $each_genre) {
 
-                        ?><a href="http://ustream.test/films/<?php print_r(strtolower($each_genre->name))?>/1"><?php print_r($each_genre->name)?></a>
-                    <?php }
-                    ?>
+                            ?><a href="http://ustream.test/films/<?php print_r(strtolower($each_genre->name))?>/1"><?php print_r($each_genre->name)?></a>
+                        <?php }
+                        ?>
+                    </div>
                 </div>
             </div>
         </div>
@@ -70,13 +72,13 @@ session_start();
 ?>
 
 <div class="flex flex-col p-8 bg-[#f5e5ae]">
-    <div class="flex">
-        <img class="w-[25vw]" src="<?= $filmImg ?>" alt="Film Poster">
+    <div class="flex flex-col md:flex-row items-center">
+        <img class="md:w-[25vw] w-[50vw]" src="<?= $filmImg ?>" alt="Film Poster">
         <div class="flex flex-col p-8 justify-between">
             <div class="flex items-center justify-between">
                 <div class="flex flex-col">
                     <h3 class="font-bold text-3xl text-grey border-t-8 border-l-8 border-grey p-8">{{ $film->title }}</h3>
-                    <div class="flex justify-between mt-2 w-[20vw]">
+                    <div class="flex justify-between mt-2 w-[20vw] flex-col md:flex-row">
                         <p class=""><strong class=" text-grey">Release date:</strong>  {{ $film->release_date }}</p>
                         <p class="font-bold text-grey">{{ $film->runtime }}min</p>
                     </div>
@@ -86,9 +88,7 @@ session_start();
                     <div class="flex flex-col items-center p-4 rounded-full border-4 border-grey bg-green-600">
                         <p class="font-bold">{{ $film->vote_average }}</p>
                     </div>
-
                 </div>
-
             </div>
             <p class="">{{ $film->overview }}</p>
             <div class="flex justify-between items-center">
@@ -102,13 +102,12 @@ session_start();
                 </div>
                 <div class="border-b-8 border-r-8 border-grey p-4">
                     <button class="addMovieBtn" type="button">
-                        <img class="w-[20%] m-2" src="/img/addmovie.png" alt="Add Movie To Playslist">
+                        <img class="w-[70px] m-2" src="/img/addmovie.png" alt="Add Movie To Playslist">
                     </button>
                 </div>
             </div>
         </div>
     </div>
-
 
     <div class="actors">
         <?php
@@ -122,7 +121,7 @@ session_start();
                 <div class="carousel-track">
                     @foreach($film->cast as $character)
                             <?php if($character->known_for_department == "Acting" && $character->profile_path != "" ){?>
-                        <div class="card w-[7vw!important] mx-4">
+                        <div class="card md:w-[7vw!important] mx-4">
                             <h3 class="filmTitle font-bold"> {{$character->name}}</h3>
                             <img src="https://image.tmdb.org/t/p/w220_and_h330_face/{{$character->profile_path}}" alt="Actor Image">
                         </div>
@@ -169,9 +168,9 @@ $film = json_decode($json_data);
     </div>
 </div>
 
-<footer class="bg-grey text-yellow flex items-center gap-[10%] p-[5%]">
-    <img class="w-[20%]" src="/img/logowhite.png" alt="Logo">
-    <div class="w-[50vw]">
+<footer class="bg-grey text-yellow flex flex-col md:flex-row items-center gap-[10%] p-[5%]">
+    <img class="w-[200px]" src="/img/logowhite.png" alt="Logo">
+    <div class="md:w-[50vw] w-[80vw]">
         <h2 class="text-2xl font-semibold my-2">Genres</h2>
         <div class="mx-2 grid grid-cols-4 w-[100%] gap-[5%]">
             <?php

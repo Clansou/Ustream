@@ -10,9 +10,9 @@ if(isset($_GET['Search'])){
 
 
 if(isset($_SESSION['Search'])){
-  echo '<input id="search-bar" value="'.$_SESSION['Search'].'" class="mt-[10vh] p-6 h-[10vh] w-[50vw] rounded-full border-2 border-black shadow-xl italic font-semibold" type="text" name="Search" placeholder="Search movie...">';
+  echo '<input id="search-bar" value="'.$_SESSION['Search'].'" class="sm:my-4 my-8 md:w-[90vw] w-[50vw] rounded-full font-semibold" type="text" name="Search" placeholder="Search movie...">';
 }else{
-echo '<input id="search-bar" class="mt-[10vh] p-6 h-[10vh] w-[50vw] rounded-full border-2 border-black shadow-xl italic font-semibold" type="text" name="Search" placeholder="Search movie...">';
+echo '<input id="search-bar" class="sm:my-4 my-8 md:w-[90vw] w-[50vw] rounded-full font-semibold" type="text" name="Search" placeholder="Search movie...">';
 }
 ?>
 </form>
@@ -34,7 +34,7 @@ function display_search(){
           <div class="search-result">
               <h2 class="search-h2">Top research results</h2>
               <div class="searchGrid">
-                  <?php foreach(array_slice($search_films_data->results, 0, 99) as $film){?>
+                  <?php foreach(array_slice($search_films_data->results, 0, 9) as $film){?>
                       <div class="search-filmCard">
                           <a class="flex" href="http://ustream.test/film/<?php echo $film->id ?>">
                               <?php
