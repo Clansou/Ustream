@@ -72,11 +72,21 @@
     <p>Invited by <?php echo($user_inviter_info->name); ?> on album <?php echo ($album_info->name)?> </p>
     <form class="flex flex-col gap-3" method="post" action="{{ route('Share_Album') }}">
                 @csrf
+                <input id="Accept" name="Accept" type="hidden" value="1">
                 <input id="id_album" name="id_album" type="hidden" value="<?php echo $album_info->id ?>">
                 <input id="id_user" name="id_user" type="hidden" value="<?php echo Auth::user()->id ?>">
                 <input id="id" name="id" type="hidden" value="<?php echo $invitation->id ?>">
             <button type="submit">Accept</button>
     </form>
+    <form class="flex flex-col gap-3" method="post" action="{{ route('Share_Album') }}">
+                @csrf
+                <input id="Accept" name="Accept" type="hidden" value="0">
+                <input id="id_album" name="id_album" type="hidden" value="<?php echo $album_info->id ?>">
+                <input id="id_user" name="id_user" type="hidden" value="<?php echo Auth::user()->id ?>">
+                <input id="id" name="id" type="hidden" value="<?php echo $invitation->id ?>">
+            <button type="submit">Refuse</button>
+    </form>
+    
 
     @endforeach
     
