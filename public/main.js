@@ -69,7 +69,6 @@ prev2.addEventListener("click", function (e) {
     }
 })
 
-
 function myFunction() {
   document.getElementById("myDropdown").classList.toggle("show");
 }
@@ -84,4 +83,17 @@ window.onclick = function(e) {
       }
     }
   }
+}
+
+let i = 0
+const likeIcon = document.getElementById("likeIcon")
+likeIcon.onclick = function(){
+
+    if(i == 0){
+        likeIcon.src = "img/heartRed.svg"
+        i = 1
+    }else{
+        likeIcon.src = "img/heartBlack.svg"
+        i = 0
+    }
 }
