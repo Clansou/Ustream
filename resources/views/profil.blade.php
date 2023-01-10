@@ -121,22 +121,33 @@
     ?>
     <h2 class="text-4xl text-grey font-bold m-4">Album liked by <?php echo $user_info->name ?></h2>
     @foreach($albums_liked as $album)
-        <div class="album">
-            <h3>{{$album->name}} <?php if( DB::table('_liked__album')->where('user_id', '=' ,  Auth::user()->id)->where('albums_id', '=', $album->id)->count() >=1){
+        <div class="bg-lightGrey p-6 m-4 rounded-2xl">
+            <h3 class="text-2xl text-yellow font-bold m-2 underline">{{$album->name}} <?php if( DB::table('_liked__album')->where('user_id', '=' ,  Auth::user()->id)->where('albums_id', '=', $album->id)->count() >=1){
                 echo "(liked)";
             } ?></h3>
             <?php
             $films= DB::table('films_in_albums')
             ->where('albums_id', $album->id)
-            ->get()->all();
-            foreach($films as $film_in_album){
-                $api_url = 'https://api.themoviedb.org/3/movie/'.$film_in_album->films_id.'?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
-                $json_data = file_get_contents($api_url);
-                $film = json_decode($json_data);
-                print_r($film);
-                print_r($film_in_album->id);
-                ?><?php
-            }?>
+            ->get()->all(); ?>
+            <div class="gridFilms justify-items-center select-none">
+                <?php foreach($films as $film_in_album){
+                    $api_url = 'https://api.themoviedb.org/3/movie/'.$film_in_album->films_id.'?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
+                    $json_data = file_get_contents($api_url);
+                    $film = json_decode($json_data); ?>
+                    <div class="filmCard m-4 text-lg shadow-2xl flex flex-col">
+                        <a href="http://ustream.test/film/{{$film->id}}">
+                            <h3 class="filmTitle font-bold">{{ $film->title }}</h3>
+                                <?php
+                                $filmPoster = "https://image.tmdb.org/t/p/w220_and_h330_face/{$film->poster_path}";
+                            $filmNoImg = "/img/noimg.jpg";
+                            $posterExists = $film->poster_path;
+                            $filmImg = $posterExists == "" ? $filmNoImg : $filmPoster ;
+                            ?>
+                        <img src="<?= $filmImg ?>" alt="Film Poster">
+                        </a>
+                    </div>
+                <?php } ?>
+            </div>
         </div>
     @endforeach
 

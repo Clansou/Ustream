@@ -113,13 +113,13 @@
             <?php
             $films= DB::table('films_in_albums')
             ->where('albums_id', $album->id)
-            ->get()->all();
-            foreach($films as $film_in_album){
+            ->get()->all(); ?>
+            <div class="gridFilms justify-items-center select-none">
+                <?php foreach($films as $film_in_album){
                 $api_url = 'https://api.themoviedb.org/3/movie/'.$film_in_album->films_id.'?api_key=c800206ebd27d3b6b6e7b19c646c4928&language=EN';
                 $json_data = file_get_contents($api_url);
                 $film = json_decode($json_data);
-                print_r($film);
-                print_r($film_in_album->id);
+                print_r($json_data);
                 ?>
                 <div class="filmCard m-4 text-lg shadow-2xl flex flex-col">
                     <a href="http://ustream.test/film/{{$film->id}}">
@@ -137,7 +137,8 @@
                     {{Form::submit('Delete', ['class' => 'btn btn-danger bg-[#fff] text-red-700 active:bg-red-700'])}}
                     {!!Form::close()!!}
                 </div>
-            <?php } ?>
+                <?php } ?>
+            </div>
         </div>
     @endforeach
 
