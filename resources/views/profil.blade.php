@@ -82,7 +82,7 @@
                         }else{
                             ?><img id="likeIcon" class="w-[50px] m-2" src="/img/heartBlack.svg" alt="Add Movie To Playslist">
                         <?php } ?>
-                        
+
                     </button>
                 </form>
                 <h3 class="text-2xl text-grey font-bold m-2 underline">{{$album->name}}</h3>
@@ -126,12 +126,10 @@
     <h2 class="text-4xl text-grey font-bold m-4">Album liked by <?php echo $user_info->name ?></h2>
     @foreach($albums_liked as $album)
         <div class="bg-lightGrey p-6 m-4 rounded-2xl">
-            <h3 class="text-2xl text-yellow font-bold m-2 underline">{{$album->name}} <?php if( DB::table('_liked__album')->where('user_id', '=' ,  Auth::user()->id)->where('albums_id', '=', $album->id)->count() >=1){
-                echo "(liked)";
-            } ?></h3>
+            <h3 class="text-2xl text-yellow font-bold m-2 underline">{{$album->name}}</h3>
             <?php
             $films= DB::table('films_in_albums')
-            ->where('albums_id', $album->id)
+            ->where('albums_id', $album->albums_id)
             ->get()->all(); ?>
             <div class="gridFilms justify-items-center select-none">
                 <?php foreach($films as $film_in_album){

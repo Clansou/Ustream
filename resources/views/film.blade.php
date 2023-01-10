@@ -140,7 +140,7 @@ session_start();
         $json_data = file_get_contents($api_url);
         $film = json_decode($json_data);
         ?>
-        <h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Actors</h2>
+        <h2 class="text-2xl font-bold mx-[4%] mt-[3%]">Casting</h2>
         <div class="carousel-container select-none">
             <div class="inner-carousel">
                 <div class="carousel-track">
