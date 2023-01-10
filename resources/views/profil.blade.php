@@ -129,7 +129,7 @@
             <h3 class="text-2xl text-yellow font-bold m-2 underline">{{$album->name}}</h3>
             <?php
             $films= DB::table('films_in_albums')
-            ->where('albums_id', $album->id)
+            ->where('albums_id', $album->albums_id)
             ->get()->all(); ?>
             <div class="gridFilms justify-items-center select-none">
                 <?php foreach($films as $film_in_album){
