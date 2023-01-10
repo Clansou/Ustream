@@ -52,7 +52,7 @@
 
     <<div class="flex justify-around text-3xl font-bold my-8 text-center">
         <a class="bg-lightGrey border-2 border-grey px-8 py-2 hover:bg-grey hover:text-yellow" href="http://ustream.test/my_profil">My profil</a>
-        <a class="bg-lightGrey border-2 border-grey px-8 py-2 hover:bg-grey hover:text-yellow" href="http://ustream.test/MyInvitations">My invitation</a>
+        <a class="bg-lightGrey border-2 border-grey px-8 py-2 hover:bg-grey hover:text-yellow" href="http://ustream.test/MyInvitations">My invitations</a>
         <a class="bg-lightGrey border-2 border-grey px-8 py-2 hover:bg-grey hover:text-yellow" href="http://ustream.test/allprofils">All profils</a>
     </div>
 
@@ -117,6 +117,6 @@
             }?>
         </div>
     @endforeach
-    
+
 </body>
 </html>
