@@ -123,13 +123,17 @@ class CustomAuthController extends Controller
         return Redirect('login');
     }
     public function getProfil($id){
-        if($user_info = DB::table('users')
+        if(Auth::check()){
+            if($user_info = DB::table('users')
         ->select()
         ->where('id' ,  '=' ,  $id)
         ->first()){
-            return view('profil',['user_info' => $user_info]);
+                return view('profil',['user_info' => $user_info]);
+            }
+            return redirect("login")->withSuccess('Not found');
         }
-        return redirect("login")->withSuccess('Not found');
+        return redirect("login")->withSuccess('Not connected');
+        
 
 
     }
