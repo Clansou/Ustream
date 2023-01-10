@@ -162,7 +162,6 @@
             <form class="flex flex-col gap-3" method="post" action="{{ route('Invite_Album') }}">
                 @csrf
                 <select type="text" id="id_album" class="form-control" name="id_album" required autofocus>
-                    <option value="Album Name">Album Name</option>
                     <?php   $my_albums= DB::table('albums')
                         ->where('user_id', Auth::user()->id)
                         ->get()->all();
@@ -170,7 +169,6 @@
                     <option value="<?php echo $my_album->id ?>"> <?php echo $my_album->name ?></option><?php }?>
                 </select>
                 <select type="text" id="id_user" class="form-control" name="id_user" required autofocus>
-                    <option value="User Name">User Name</option>
                     <?php   $all_users= DB::table('users')
                         ->where("id", "!=" , Auth::user()->id)
                         ->get()->all();
