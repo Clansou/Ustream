@@ -82,7 +82,7 @@
                         }else{
                             ?><img id="likeIcon" class="w-[50px] m-2" src="/img/heartBlack.svg" alt="Add Movie To Playslist">
                         <?php } ?>
-                        
+
                     </button>
                 </form>
                 <h3 class="text-2xl text-grey font-bold m-2 underline">{{$album->name}}</h3>
