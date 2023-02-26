@@ -60,3 +60,57 @@ Footer
 Footer navigation
 Terms
 Privacy
+
+## Étapes
+
+1. Clonez le projet depuis Github.com:
+
+    ```bash
+    git clone https://github.com/username/project-name.git
+    ```
+
+2. Installez les dépendances du projet:
+
+    ```bash
+    composer install
+    npm install
+    ```
+
+3. Copiez le fichier `.env.example` en `.env` et générez une nouvelle clé pour l'application:
+
+    ```bash
+    cp .env.example .env
+    php artisan key:generate
+    ```
+
+4. Mettez à jour le fichier `.env` avec les informations de votre base de données:
+
+    ```bash
+    DB_CONNECTION=mysql
+    DB_HOST=127.0.0.1
+    DB_PORT=3306
+    DB_DATABASE=nom_de_votre_base_de_donnees
+    DB_USERNAME=votre_nom_d'utilisateur_de_la_base_de_donnees
+    DB_PASSWORD=votre_mot_de_passe_de_la_base_de_donnees
+    ```
+
+5. Exécutez les migrations de la base de données:
+
+    ```bash
+    php artisan migrate
+    ```
+
+6. Lancez l'application:
+
+    ```bash
+    php artisan serve
+    ```
+    vous avez aussi besoin de 
+     ```bash
+    npm run dev
+    ```
+
+
+L'application sera disponible à l'adresse http://localhost:8000.
+
+Enjoy ;)
