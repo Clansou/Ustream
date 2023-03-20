@@ -66,7 +66,7 @@ Privacy
 1. Clonez le projet depuis Github.com:
 
     ```bash
-    git clone https://github.com/username/project-name.git
+    git clone git@github.com:Clansou/Ustream.git
     ```
 
 2. Installez les dépendances du projet:
